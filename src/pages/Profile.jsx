@@ -1,10 +1,10 @@
 import NavBar from '../components/NavBar'
-import { FaHeart, FaEdit } from 'react-icons/fa'
+import { FaHeart, FaEdit, FaTimes } from 'react-icons/fa'
 import Wishlist from '../components/Wishlist'
 import { useState } from 'react'
 
 const Profile = () => {
-  const [wishlist, setWishlist] = useState(false)
+  const [wishlistOpen, setWishlistOpen] = useState(false)
   return (
     <div className='flex flex-col min-h-screen'>
       <NavBar />
@@ -26,7 +26,7 @@ const Profile = () => {
             <div className='flex space-x-4'>
               <button
                 className='bg-black text-white px-4 py-2 rounded-full hover:bg-white hover:text-black font-semibold border border-black transition duration-300 flex items-center'
-                onClick={() => setWishlist(!wishlist)}
+                onClick={() => setWishlistOpen(true)}
               >
                 <FaHeart className='mr-2' />
                 Wishlist
@@ -38,7 +38,22 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        {wishlist && <Wishlist />}
+        {wishlistOpen && (
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <div className='bg-white rounded-lg p-8 w-full max-w-[1200px] max-h-[90vh] overflow-auto'>
+              <div className='flex justify-between items-center mb-4'>
+                <h2 className='text-2xl font-bold'>My Wishlist</h2>
+                <button
+                  onClick={() => setWishlistOpen(false)}
+                  className='text-gray-500 hover:text-black'
+                >
+                  <FaTimes size={24} />
+                </button>
+              </div>
+              <Wishlist />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
