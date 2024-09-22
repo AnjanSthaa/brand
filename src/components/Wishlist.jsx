@@ -40,36 +40,43 @@ const Wishlist = () => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td className='py-4 px-4'>
-                <div className='flex items-center'>
-                  <img
-                    className='h-16 w-16 mr-4'
-                    src={item.image}
-                    alt={item.name}
-                  />
-                  <span className='font-medium'>{item.name}</span>
-                </div>
-              </td>
-              <td className='py-4 px-4'>${item.price}</td>
-              <td className='py-4 px-4'>
-                <div className='flex items-center space-x-2'>
-                  <button className='bg-gray-900 text-white px-4 py-2 rounded hover:bg-white hover:text-black font-semibold border border-black transition duration-300'>
-                    Add to Cart
-                  </button>
-                  <div className='relative group'>
-                    <FaTimes
-                      className='text-gray-500 cursor-pointer hover:text-gray-700'
-                      onClick={() => handleOpen(item)}
+          {items.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <tr>
+                <td className='py-4 px-4'>
+                  <div className='flex items-center'>
+                    <img
+                      className='h-16 w-16 mr-4'
+                      src={item.image}
+                      alt={item.name}
                     />
-                    <span className='absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 -right-24 bottom-1 mb-1'>
-                      Remove item
-                    </span>
+                    <span className='font-medium'>{item.name}</span>
                   </div>
-                </div>
-              </td>
-            </tr>
+                </td>
+                <td className='py-4 px-4'>{item.price}</td>
+                <td className='py-4 px-4'>
+                  <div className='flex items-center space-x-2'>
+                    <button className='bg-gray-900 text-white px-4 py-2 rounded hover:bg-white hover:text-black font-semibold border border-black transition duration-300'>
+                      Add to Cart
+                    </button>
+                    <div className='relative group'>
+                      <FaTimes
+                        className='text-gray-500 cursor-pointer hover:text-gray-700'
+                        onClick={() => handleOpen(item)}
+                      />
+                      <span className='absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 -right-24 bottom-1 mb-1'>
+                        Remove item
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {index < items.length - 1 && (
+                <tr>
+                  <td colSpan='3' className='border-b border-gray-200'></td>
+                </tr>
+              )}
+            </React.Fragment>
           ))}
         </tbody>
       </table>

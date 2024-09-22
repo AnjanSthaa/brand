@@ -40,8 +40,8 @@ const Profile = () => {
         </div>
         {wishlistOpen && (
           <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-            <div className='bg-white rounded-lg p-8 w-full max-w-[1200px] max-h-[90vh] overflow-auto'>
-              <div className='flex justify-between items-center mb-4'>
+            <div className='bg-white rounded-lg w-full max-w-[1200px] max-h-[90vh] flex flex-col'>
+              <div className='sticky shadow-sm top-0 bg-white z-10 flex justify-between items-center p-8'>
                 <h2 className='text-2xl font-bold'>My Wishlist</h2>
                 <button
                   onClick={() => setWishlistOpen(false)}
@@ -50,7 +50,9 @@ const Profile = () => {
                   <FaTimes size={24} />
                 </button>
               </div>
-              <Wishlist />
+              <div className='overflow-auto flex-grow p-8 pt-0'>
+                <Wishlist />
+              </div>
             </div>
           </div>
         )}
