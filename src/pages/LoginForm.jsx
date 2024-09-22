@@ -2,10 +2,40 @@ import React, { useState } from 'react'
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
 
-  const togglePasswordVisibility = (field) => {
-    if (field === 'password') {
-      setShowPassword(!showPassword)
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const validateForm = () => {
+    let formErrors = {}
+
+    if (!email) {
+      formErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      formErrors.email = 'Email is invalid'
+    } else if (!email.includes('.com')) {
+      formErrors.email = 'Email must include .com'
+    }
+
+    if (!password) {
+      formErrors.password = 'Password is required'
+    }
+
+    setErrors(formErrors)
+    return Object.keys(formErrors).length === 0
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (validateForm()) {
+      console.log('Form is valid')
+      // Here you would typically send the data to your backend
+    } else {
+      console.log('Form is invalid')
     }
   }
 
@@ -28,7 +58,7 @@ const LoginForm = () => {
           </h2>
 
           {/* Form */}
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className='mb-4 relative'>
               <label
                 className='block text-gray-600 text-sm font-medium mb-2'
@@ -40,6 +70,8 @@ const LoginForm = () => {
                 <input
                   type='email'
                   id='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className='w-full pl-10 pr-3 py-2 lg:pl-11 lg:pr-4 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                 />
                 <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400'>
@@ -54,6 +86,9 @@ const LoginForm = () => {
                   </svg>
                 </span>
               </div>
+              {errors.email && (
+                <p className='text-red-500 text-xs mt-1'>{errors.email}</p>
+              )}
             </div>
             <div className='mb-4 relative'>
               <label
@@ -66,6 +101,8 @@ const LoginForm = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className='w-full pl-10 pr-10 py-2 lg:pl-11 lg:pr-11 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                 />
                 <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400'>
@@ -85,7 +122,7 @@ const LoginForm = () => {
                 <button
                   type='button'
                   className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400'
-                  onClick={() => togglePasswordVisibility('password')}
+                  onClick={togglePasswordVisibility}
                 >
                   {showPassword ? (
                     <svg
@@ -118,6 +155,9 @@ const LoginForm = () => {
                   )}
                 </button>
               </div>
+              {errors.password && (
+                <p className='text-red-500 text-xs mt-1'>{errors.password}</p>
+              )}
             </div>
 
             <div className='mb-4'>
