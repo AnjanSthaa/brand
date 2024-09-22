@@ -3,12 +3,86 @@ import React, { useState } from 'react'
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showReenterPassword, setShowReenterPassword] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: '',
+    reenterPassword: '',
+  })
+  const [errors, setErrors] = useState({})
 
   const togglePasswordVisibility = (field) => {
     if (field === 'password') {
       setShowPassword(!showPassword)
     } else if (field === 'reenterPassword') {
       setShowReenterPassword(!showReenterPassword)
+    }
+  }
+
+  const validateForm = () => {
+    let newErrors = {}
+
+    // First Name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
+    }
+
+    // Last Name validation
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required'
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid'
+    }
+
+    // Phone validation (Nepal format)
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required'
+    } else if (!/^(98|97)\d{8}$/.test(formData.phone)) {
+      newErrors.phone =
+        'Phone number should be in Nepal format (e.g., 9812345678)'
+    }
+
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = 'Password is required'
+    } else if (
+      formData.password.length < 8 ||
+      !/^(?=.*[0-9!@#$%^&*])/.test(formData.password)
+    ) {
+      newErrors.password =
+        'Password must be at least 8 characters long with one symbol or number'
+    }
+
+    // Re-enter Password validation
+    if (!formData.reenterPassword) {
+      newErrors.reenterPassword = 'Please re-enter your password'
+    } else if (formData.reenterPassword !== formData.password) {
+      newErrors.reenterPassword = 'Passwords do not match'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (validateForm()) {
+      // Form is valid, proceed with submission
+      console.log('Form submitted:', formData)
+    } else {
+      console.log('Form has errors')
     }
   }
 
@@ -31,7 +105,7 @@ const Signup = () => {
           </h2>
 
           {/* Form */}
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className='flex flex-col sm:flex-row mb-4 space-y-4 sm:space-y-0 sm:space-x-4'>
               <div className='w-full sm:w-1/2'>
                 <label
@@ -43,9 +117,17 @@ const Signup = () => {
                 <input
                   type='text'
                   id='firstName'
+                  name='firstName'
+                  value={formData.firstName}
+                  onChange={handleInputChange}
                   className='w-full px-3 py-2 lg:px-4 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                   placeholder='Your'
                 />
+                {errors.firstName && (
+                  <p className='text-red-500 text-xs mt-1'>
+                    {errors.firstName}
+                  </p>
+                )}
               </div>
               <div className='w-full sm:w-1/2'>
                 <label
@@ -57,9 +139,15 @@ const Signup = () => {
                 <input
                   type='text'
                   id='lastName'
+                  name='lastName'
+                  value={formData.lastName}
+                  onChange={handleInputChange}
                   className='w-full px-3 py-2 lg:px-4 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                   placeholder='Name'
                 />
+                {errors.lastName && (
+                  <p className='text-red-500 text-xs mt-1'>{errors.lastName}</p>
+                )}
               </div>
             </div>
 
@@ -74,6 +162,9 @@ const Signup = () => {
                 <input
                   type='email'
                   id='email'
+                  name='email'
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className='w-full pl-10 pr-3 py-2 lg:pl-11 lg:pr-4 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                   placeholder='you@example.com'
                 />
@@ -89,6 +180,9 @@ const Signup = () => {
                   </svg>
                 </span>
               </div>
+              {errors.email && (
+                <p className='text-red-500 text-xs mt-1'>{errors.email}</p>
+              )}
             </div>
 
             <div className='mb-4 relative'>
@@ -102,8 +196,11 @@ const Signup = () => {
                 <input
                   type='tel'
                   id='phone'
+                  name='phone'
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className='w-full pl-10 pr-3 py-2 lg:pl-11 lg:pr-4 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
-                  placeholder='(123) 456-7890'
+                  placeholder='9812345678'
                 />
                 <span className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400'>
                   <svg
@@ -116,6 +213,9 @@ const Signup = () => {
                   </svg>
                 </span>
               </div>
+              {errors.phone && (
+                <p className='text-red-500 text-xs mt-1'>{errors.phone}</p>
+              )}
             </div>
 
             <div className='mb-4 relative'>
@@ -129,6 +229,9 @@ const Signup = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id='password'
+                  name='password'
+                  value={formData.password}
+                  onChange={handleInputChange}
                   className='w-full pl-10 pr-10 py-2 lg:pl-11 lg:pr-11 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                   placeholder='••••••••'
                 />
@@ -182,6 +285,9 @@ const Signup = () => {
                   )}
                 </button>
               </div>
+              {errors.password && (
+                <p className='text-red-500 text-xs mt-1'>{errors.password}</p>
+              )}
             </div>
 
             <div className='mb-4 lg:mb-6 relative'>
@@ -195,6 +301,9 @@ const Signup = () => {
                 <input
                   type={showReenterPassword ? 'text' : 'password'}
                   id='reenterPassword'
+                  name='reenterPassword'
+                  value={formData.reenterPassword}
+                  onChange={handleInputChange}
                   className='w-full pl-10 pr-10 py-2 lg:pl-11 lg:pr-11 lg:py-2 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black'
                   placeholder='••••••••'
                 />
@@ -248,6 +357,11 @@ const Signup = () => {
                   )}
                 </button>
               </div>
+              {errors.reenterPassword && (
+                <p className='text-red-500 text-xs mt-1'>
+                  {errors.reenterPassword}
+                </p>
+              )}
             </div>
 
             <div className='mb-4'>
