@@ -1,51 +1,44 @@
 [
     {
-        "Name": "Handmade Steel Keyboard",
-        "Rating": "1",
+        "Name": "Leather Jacket",
         "Price": "776.00",
-        "Image": "https://loremflickr.com/640/480/technology",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "1"
     },
     {
-        "Name": "Luxurious Granite Cheese",
-        "Rating": "5",
+        "Name": "Silk Blouse",
         "Price": "515.00",
-        "Image": "https://loremflickr.com/640/480/food",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "2"
     },
     {
-        "Name": "Elegant Rubber Soap",
-        "Rating": "5",
+        "Name": "Cotton T-Shirt",
         "Price": "697.00",
-        "Image": "https://loremflickr.com/640/480/bathroom",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "3"
     },
     {
-        "Name": "Incredible Wooden Bacon",
-        "Rating": "7",
+        "Name": "Wool Sweater",
         "Price": "900.00",
-        "Image": "https://loremflickr.com/640/480/lake",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "4"
     },
     {
-        "Name": "Ergonomic Wooden Computer",
-        "Rating": "6",
+        "Name": "Denim Jeans",
         "Price": "579.00",
-        "Image": "https://loremflickr.com/640/480/hill",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "5"
     },
     {
-        "Name": "Fantastic Frozen Tuna",
-        "Rating": "8",
+        "Name": "Sport Shorts",
         "Price": "535.00",
-        "Image": "https://loremflickr.com/640/480/food",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "6"
     },
     {
-        "Name": "Ergonomic Steel Bike",
-        "Rating": "1",
+        "Name": "Canvas Sneakers",
         "Price": "367.00",
-        "Image": "https://loremflickr.com/640/480/sports",
+        "Image": "https://via.placeholder.com/640x480",
         "id": "7"
     }
 ]

@@ -1,12 +1,11 @@
-import NavBar from "../components/NavBar";
+import Shop from './Shop'
 
 const Men = () => {
   return (
     <div>
-      <NavBar />
-      <h1>Men</h1>
+      <Shop />
     </div>
   )
 }
 
-export default Men;
+export default Men

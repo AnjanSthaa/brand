@@ -1,0 +1,24 @@
+{
+    "name": "Basic Tee 6-Pack",
+    "price": "$192",
+    "href": "#",
+    "images": "https://via.placeholder.com/400",
+    "colors": [
+      { "name": "White" },
+      { "name": "Gray" },
+      { "name": "Black" }
+    ],
+    "sizes": [
+      { "name": "S", "inStock": true },
+      { "name": "M", "inStock": true },
+      { "name": "L", "inStock": true },
+      { "name": "XL", "inStock": true },
+      { "name": "2XL", "inStock": true },
+      { "name": "3XL", "inStock": true }
+    ],
+    "highlights": [
+      "Locally hand-cut and sewn",
+      "Pre-shrunk cotton"
+    ]
+  }
+  

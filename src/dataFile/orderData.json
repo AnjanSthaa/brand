@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "Cotton T-Shirt",
+        "Price": "697.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "3"
+    },
+    {
+        "Name": "Wool Sweater",
+        "Price": "900.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "4"
+    }
+]

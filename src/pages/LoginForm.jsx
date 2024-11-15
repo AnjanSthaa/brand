@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -33,7 +33,7 @@ const LoginForm = () => {
     e.preventDefault()
     if (validateForm()) {
       console.log('Form is valid')
-      // Here you would typically send the data to your backend
+      
     } else {
       console.log('Form is invalid')
     }
@@ -231,4 +231,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default LoginForm;

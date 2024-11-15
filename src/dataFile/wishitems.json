@@ -1,72 +1,37 @@
 [
   {
     "id": 1,
-    "name": "Handmade Steel Keyboard",
-    "price": "$776.00",
-    "image": "https://loremflickr.com/640/480/technology",
+    "name": "Leather Jacket",
+    "price": "776.00",
+    "image": "https://via.placeholder.com/63",
     "stockStatus": "In Stock"
   },
   {
     "id": 2,
-    "name": "Luxurious Granite Cheese",
-    "price": "$515.00",
-    "image": "https://loremflickr.com/640/480/food",
+    "name": "Silk Blouse",
+    "price": "515.00",
+    "image": "https://via.placeholder.com/63",
     "stockStatus": "Out of Stock"
   },
   {
     "id": 3,
-    "name": "Elegant Rubber Soap",
-    "price": "$697.00",
-    "image": "https://loremflickr.com/640/480/bathroom",
+    "name": "Cotton Shirt",
+    "price": "697.00",
+    "image": "https://via.placeholder.com/63",
     "stockStatus": "In Stock"
   },
   {
     "id": 4,
-    "name": "Incredible Wooden Bacon",
-    "price": "$900.00",
-    "image": "https://loremflickr.com/640/480/lake",
+    "name": "Wool Sweater",
+    "price": "900.00",
+    "image": "https://via.placeholder.com/63",
     "stockStatus": "Low Stock"
   },
   {
     "id": 5,
-    "name": "Ergonomic Wooden Computer",
-    "price": "$579.00",
-    "image": "https://loremflickr.com/640/480/hill",
-    "stockStatus": "In Stock"
-  },
-  {
-    "id": 6,
-    "name": "Handmade Steel Keyboard",
-    "price": "$776.00",
-    "image": "https://loremflickr.com/640/480/technology",
-    "stockStatus": "In Stock"
-  },
-  {
-    "id": 7,
-    "name": "Luxurious Granite Cheese",
-    "price": "$515.00",
-    "image": "https://loremflickr.com/640/480/food",
-    "stockStatus": "Out of Stock"
-  },
-  {
-    "id": 8,
-    "name": "Elegant Rubber Soap",
-    "price": "$697.00",
-    "image": "https://loremflickr.com/640/480/bathroom",
-    "stockStatus": "In Stock"
-  },
-  {
-    "id": 9,
-    "name": "Incredible Wooden Bacon",
-    "price": "$900.00",
-    "image": "https://loremflickr.com/640/480/lake",
-    "stockStatus": "Low Stock"
-  },
-  {
-    "id": 10,
-    "name": "Ergonomic Wooden Computer",
-    "price": "$579.00",
-    "image": "https://loremflickr.com/640/480/hill",
+    "name": "Denim Jeans",
+    "price": "579.00",
+    "image": "https://via.placeholder.com/63",
     "stockStatus": "In Stock"
   }
 ]

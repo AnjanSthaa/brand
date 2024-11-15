@@ -1,12 +1,15 @@
-import NavBar from "../components/NavBar";
+// Women.js
 
+import ProductDesc from '../components/ProductDesc'
 const Women = () => {
   return (
     <div>
-      <NavBar />
-      <h1>Women</h1>
+      <div>
+        Using as a playground
+        <ProductDesc />
+      </div>
     </div>
   )
 }
 
-export default Women;
+export default Women
