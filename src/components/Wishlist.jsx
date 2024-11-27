@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import wishItems from '../dataFile/wishItems.json'
-import { X } from 'lucide-react'
+import { X, ShoppingCart } from 'lucide-react'
 import { Box, Button, Typography, Modal } from '@mui/material'
 
 const Wishlist = () => {
@@ -24,20 +24,14 @@ const Wishlist = () => {
   }
 
   return (
-    <div className='container mx-auto mt-10'>
-      <table className='min-w-full bg-white'>
+    <div className='container mx-auto mt-10 flex justify-center'>
+      <table className='w-full md:w-3/4 lg:w-1/2 bg-white'>
         <thead>
           <tr>
-            <th className='text-left py-3 px-4 uppercase font-semibold text-sm'>
-              Product
+            <th className='text-left py-3 px-4 uppercase font-semibold text-sm font-poppins'>
+              Product Info
             </th>
-            <th className='text-left py-3 px-4 uppercase font-semibold text-sm'>
-              Price
-            </th>
-            <th className='text-left py-3 px-4 uppercase font-semibold text-sm'>
-              Stock Status
-            </th>
-            <th className='text-left py-3 px-4 uppercase font-semibold text-sm'>
+            <th className='text-left py-3 px-4 uppercase font-semibold text-sm font-poppins'>
               Actions
             </th>
           </tr>
@@ -46,29 +40,37 @@ const Wishlist = () => {
           {items.map((item) => (
             <tr key={item.id}>
               <td className='py-4 px-4'>
-                <div className='flex items-center'>
+                <div className='flex items-center space-x-4'>
                   <img
-                    className='h-16 w-16 mr-4 object-cover'
+                    className='h-20 w-20 lg:h-24 lg:w-24 object-cover rounded-md'
                     src={item.image}
                     alt={item.name}
                   />
-                  <span className='font-medium'>{item.name}</span>
+                  <div className='text-sm md:text-base lg:text-lg'>
+                    <h5 className='font-medium'>{item.name}</h5>
+                    <p className='text-gray-600'>Rs. {item.price}</p>
+                    <p className='text-sm text-gray-500'>{item.stockStatus}</p>
+                  </div>
                 </div>
               </td>
-              <td className='py-4 px-4'>Rs.{item.price}</td>
-              <td className='py-4 px-4'>{item.stockStatus}</td>
               <td className='py-4 px-4'>
-                <div className='flex items-center space-x-2'>
-                  <button className='bg-gray-900 text-white px-4 py-2 rounded hover:bg-white hover:text-black font-semibold border border-black transition duration-300'>
-                    Add to Cart
-                  </button>
+                <div className='flex items-center space-x-4'>
+                  {/* Add to Cart Icon with Tooltip */}
+                  <div className='relative group'>
+                    <ShoppingCart className='text-gray-500 cursor-pointer hover:text-gray-700' />
+                    <span className='absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 -right-16 top-[-30px]'>
+                      Add to Cart
+                    </span>
+                  </div>
+
+                  {/* Remove Item Icon with Tooltip */}
                   <div className='relative group'>
                     <X
                       className='text-gray-500 cursor-pointer hover:text-gray-700'
                       onClick={() => handleOpen(item)}
                     />
-                    <span className='absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 -right-24 bottom-1 mb-1'>
-                      Remove item
+                    <span className='absolute hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 -right-20 top-[-30px]'>
+                      Remove Item
                     </span>
                   </div>
                 </div>
@@ -78,6 +80,7 @@ const Wishlist = () => {
         </tbody>
       </table>
 
+      {/* Confirmation Modal */}
       <Modal
         open={open}
         onClose={handleClose}
