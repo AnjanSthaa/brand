@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "image": "https://via.placeholder.com/70",
+    "label": "Shirt"
+  },
+  {
+    "id": 2,
+    "image": "https://via.placeholder.com/70",
+    "label": "Trousers"
+  },
+  {
+    "id": 3,
+    "image": "https://via.placeholder.com/70",
+    "label": "Jeans"
+  },
+  {
+    "id": 4,
+    "image": "https://via.placeholder.com/70",
+    "label": "Hoodie"
+  },
+  {
+    "id": 5,
+    "image": "https://via.placeholder.com/70",
+    "label": "Sweater"
+  },
+  {
+    "id": 6,
+    "image": "https://via.placeholder.com/70",
+    "label": "Shorts"
+  },
+  {
+    "id": 7,
+    "image": "https://via.placeholder.com/70",
+    "label": "Skirt"
+  },
+  {
+    "id": 8,
+    "image": "https://via.placeholder.com/70",
+    "label": "Coat"
+  },
+  {
+    "id": 9,
+    "image": "https://via.placeholder.com/70",
+    "label": "Blazer"
+  },
+  {
+    "id": 10,
+    "image": "https://via.placeholder.com/70",
+    "label": "Dress"
+  },
+  {
+    "id": 11,
+    "image": "https://via.placeholder.com/70",
+    "label": "Jacket"
+  }
+]

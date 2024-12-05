@@ -1,0 +1,44 @@
+[
+    {
+        "Name": "Leather Jacket",
+        "Price": "776.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "1"
+    },
+    {
+        "Name": "Silk Blouse",
+        "Price": "515.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "2"
+    },
+    {
+        "Name": "Cotton T-Shirt",
+        "Price": "697.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "3"
+    },
+    {
+        "Name": "Wool Sweater",
+        "Price": "900.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "4"
+    },
+    {
+        "Name": "Denim Jeans",
+        "Price": "579.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "5"
+    },
+    {
+        "Name": "Sport Shorts",
+        "Price": "535.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "6"
+    },
+    {
+        "Name": "Canvas Sneakers",
+        "Price": "367.00",
+        "Image": "https://via.placeholder.com/640x480",
+        "id": "7"
+    }
+]

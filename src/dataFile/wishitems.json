@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Leather Jacket",
+    "price": "776.00",
+    "image": "https://via.placeholder.com/63",
+    "stockStatus": "In Stock"
+  },
+  {
+    "id": 2,
+    "name": "Silk Blouse",
+    "price": "515.00",
+    "image": "https://via.placeholder.com/63",
+    "stockStatus": "Out of Stock"
+  },
+  {
+    "id": 3,
+    "name": "Cotton Shirt",
+    "price": "697.00",
+    "image": "https://via.placeholder.com/63",
+    "stockStatus": "In Stock"
+  },
+  {
+    "id": 4,
+    "name": "Wool Sweater",
+    "price": "900.00",
+    "image": "https://via.placeholder.com/63",
+    "stockStatus": "Low Stock"
+  },
+  {
+    "id": 5,
+    "name": "Denim Jeans",
+    "price": "579.00",
+    "image": "https://via.placeholder.com/63",
+    "stockStatus": "In Stock"
+  }
+]
