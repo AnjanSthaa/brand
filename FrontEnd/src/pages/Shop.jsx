@@ -4,11 +4,13 @@ import UCard from '../components/UCard'
 
 const Shop = () => {
   return (
-    <div>
+    <div className='flex min-h-screen bg-gray-50'>
       <Sidebar />
-      <div className='lg:ml-[320px]'>
+      <div className='flex-1 w-full 2xl:ml-[300px]'>
         <Shopheader />
-        <UCard />
+        <div className='pb-20'>
+          <UCard />
+        </div>
       </div>
     </div>
   )

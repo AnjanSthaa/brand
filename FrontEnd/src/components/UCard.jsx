@@ -103,7 +103,7 @@ const UCard = () => {
 
   return (
     <div className='main-container flex justify-left items-center font-poppins relative'>
-      <div className='w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6 px-4'>
+      <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6 px-4'>
         {randomProducts.map((item) => (
           <div
             key={item._id}
@@ -121,7 +121,7 @@ const UCard = () => {
                   e.stopPropagation()
                   toggleWishlist(item._id)
                 }}
-                className='absolute bottom-2 right-2 bg-white rounded-full p-1 shadow hover:shadow-md transition-colors'
+                className='absolute bottom-2 right-2 p-1 transition-colors'
               >
                 <Heart
                   className={`w-5 h-5 transition-colors ${
@@ -132,11 +132,11 @@ const UCard = () => {
                 />
               </button>
             </div>
-            <div className='mt-2 p-2 flex justify-between'>
-              <div>
-                <h3 className='text-sm text-gray-700'>{item.name}</h3>
-              </div>
+            <div className='mt-2 p-2 flex justify-between items-center'>
               <p className='text-sm font-bold'>Rs.{item.price}</p>
+              <h3 className='text-sm text-gray-700 truncate max-w-[60%]'>
+                {item.name}
+              </h3>
             </div>
           </div>
         ))}

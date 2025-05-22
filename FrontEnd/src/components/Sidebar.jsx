@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <nav
       id='sidebar'
-      className='bg-white text-gray-800 p-6 w-[300px] fixed top-0 shadow-lg mt-14 pt-10 h-screen hidden lg:block overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400'
+      className='bg-white text-gray-800 p-6 w-[300px] fixed top-0 shadow-lg mt-14 pt-10 h-[calc(100vh-3.5rem)] hidden 2xl:block overflow-y-auto z-10 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400'
     >
       <div className='pt-5'>
         <h5 className='font-poppins text-2xl font-normal mb-7'>Categories</h5>
@@ -21,7 +21,7 @@ const Sidebar = () => {
               onClick={() => toggleSubmenu('mensClothing')}
               className='flex items-center justify-between text-left w-full font-poppins text-sm font-normal'
             >
-              Men's Clothing
+              Men&apos;s Clothing
               <span className='absolute right-0 text-black font-bold'>
                 &#9662;
               </span>
@@ -64,7 +64,7 @@ const Sidebar = () => {
               onClick={() => toggleSubmenu('womensClothing')}
               className='flex items-center justify-between text-left w-full -mt-3 font-poppins text-sm font-normal'
             >
-              Women's Clothing
+              Women&apos;s Clothing
               <span className='absolute right-0 text-black font-bold'>
                 &#9662;
               </span>

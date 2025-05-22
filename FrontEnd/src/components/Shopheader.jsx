@@ -23,10 +23,10 @@ function Shopheader() {
 
   return (
     <div>
-      <nav className='bg-white text-black p-4 mt-3 mb-0 pb-6 sm:pb-0 md:pr-20 flex items-center justify-between'>
+      <nav className='bg-white text-black p-4 mt-3 mb-0 pb-6 sm:pb-0 flex items-center justify-between max-w-[1400px] mx-auto'>
         {/* Left section for the Products title */}
         <div className='flex justify-start'>
-          <h2 className='text-xl md:text-2xl font-bold tracking-tight text-gray-900 font-poppins ml-0 md:ml-12'>
+          <h2 className='text-xl md:text-2xl font-bold tracking-tight text-gray-900 font-poppins'>
             Products
           </h2>
         </div>
@@ -34,7 +34,7 @@ function Shopheader() {
         {/* Right section */}
         <div className='flex items-center space-x-4'>
           {/* Search bar and sort options for larger screens */}
-          <div className='hidden md:flex items-center space-x-4'>
+          <div className='hidden 2xl:flex items-center space-x-4'>
             <form className='flex items-center'>
               <div className='relative w-full max-w-xs md:max-w-sm border-b border-gray-300 flex'>
                 <label htmlFor='search-input' className='sr-only'>
@@ -61,7 +61,7 @@ function Shopheader() {
           </div>
 
           {/* Icons for small screens */}
-          <div className='flex md:hidden space-x-4'>
+          <div className='flex 2xl:hidden space-x-4'>
             <button onClick={toggleSearch} className='p-2'>
               <Search className='w-5 h-5' />
             </button>

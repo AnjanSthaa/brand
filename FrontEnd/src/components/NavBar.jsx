@@ -90,7 +90,7 @@ const NavBar = () => {
           <ul className='hidden lg:flex space-x-6'>
             <li>
               <NavLink
-                to='/Men'
+                to='/shop'
                 className='flex items-center hover:text-primary transition-colors'
                 onClick={GotoTop}
               >
@@ -163,7 +163,7 @@ const NavBar = () => {
             <ul className='space-y-2'>
               <li>
                 <NavLink
-                  to='/Men'
+                  to='/shop'
                   className='block px-4 py-2 hover:bg-gray-100 transition-colors'
                   onClick={() => {
                     GotoTop()
