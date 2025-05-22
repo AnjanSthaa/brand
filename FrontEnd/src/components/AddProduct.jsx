@@ -59,18 +59,6 @@ const AddProduct = () => {
   return (
     <div className='m-0 flex justify-center items-center'>
       <div className='bg-white rounded-lg p-6 w-full'>
-        {feedback.message && (
-          <div
-            className={`mb-4 p-3 rounded ${
-              feedback.type === 'success'
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700'
-            }`}
-          >
-            {feedback.message}
-          </div>
-        )}
-
         <div className='flex flex-col items-center space-y-6'>
           <div className='flex flex-col w-full space-y-4'>
             {/* Product Name */}
@@ -338,6 +326,17 @@ const AddProduct = () => {
             </button>
           </div>
         </div>
+        {feedback.message && (
+          <div
+            className={`mt-6 p-3 rounded text-center ${
+              feedback.type === 'success'
+                ? 'bg-green-100 text-green-700'
+                : 'bg-red-100 text-red-700'
+            }`}
+          >
+            {feedback.message}
+          </div>
+        )}
       </div>
     </div>
   )

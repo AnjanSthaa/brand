@@ -101,7 +101,7 @@ const Profile = () => {
             {user.role === 'seller' ? (
               <button
                 onClick={() => handleRoleChange('buyer')}
-                className='bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-green-300 transition'
+                className='bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
               >
                 <Store className='w-5 h-5' />
                 <span>Become a Buyer</span>
@@ -109,7 +109,7 @@ const Profile = () => {
             ) : (
               <button
                 onClick={() => handleRoleChange('seller')}
-                className='bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-blue-300 transition'
+                className='bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
               >
                 <Store className='w-5 h-5' />
                 <span>Become a Seller</span>
@@ -117,7 +117,7 @@ const Profile = () => {
             )}
             <button
               onClick={handleLogout}
-              className='bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-red-300 transition'
+              className='bg-red-600 hover:bg-white hover:text-red-600 text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-red-300 transition border border-red-600'
             >
               <LogOut className='w-5 h-5' />
               <span>Logout</span>

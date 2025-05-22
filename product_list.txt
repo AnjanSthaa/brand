@@ -1,0 +1,284 @@
+[
+  {
+    "name": "Wool Overcoat",
+    "price": 149.99,
+    "image": "https://images.unsplash.com/photo-1608063615781-e2ef8c73d114?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Premium wool overcoat with a classic silhouette. Perfect for cold weather and formal occasions.",
+    "colors": [
+      {
+        "name": "Charcoal",
+        "hex": "#36454f"
+      },
+      {
+        "name": "Camel",
+        "hex": "#c19a6b"
+      },
+      {
+        "name": "Navy",
+        "hex": "#000080"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "L",
+        "inStock": true,
+        "stockAmount": 8
+      },
+      {
+        "name": "M",
+        "inStock": true,
+        "stockAmount": 10
+      },
+      {
+        "name": "S",
+        "inStock": true,
+        "stockAmount": 6
+      }
+    ],
+    "highlights": ["Men's Outerwear", "Winter", "Formal"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Silk Blouse",
+    "price": 79.99,
+    "image": "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Elegant silk blouse with a relaxed fit. Perfect for both office and evening wear.",
+    "colors": [
+      {
+        "name": "Ivory",
+        "hex": "#fffff0"
+      },
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "Blush",
+        "hex": "#de5d83"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "L",
+        "inStock": true,
+        "stockAmount": 12
+      },
+      {
+        "name": "M",
+        "inStock": true,
+        "stockAmount": 15
+      },
+      {
+        "name": "S",
+        "inStock": true,
+        "stockAmount": 10
+      }
+    ],
+    "highlights": ["Women's Tops", "Silk", "Business Casual"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Leather Backpack",
+    "price": 89.99,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Handcrafted leather backpack with multiple compartments. Perfect for work or travel.",
+    "colors": [
+      {
+        "name": "Brown",
+        "hex": "#8b4513"
+      },
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "Tan",
+        "hex": "#d2b48c"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "One Size",
+        "inStock": true,
+        "stockAmount": 20
+      }
+    ],
+    "highlights": ["Accessories", "Leather", "Travel"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Cashmere Sweater",
+    "price": 129.99,
+    "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Luxurious cashmere sweater with a relaxed fit. Incredibly soft and warm.",
+    "colors": [
+      {
+        "name": "Cream",
+        "hex": "#fffdd0"
+      },
+      {
+        "name": "Gray",
+        "hex": "#808080"
+      },
+      {
+        "name": "Navy",
+        "hex": "#000080"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "L",
+        "inStock": true,
+        "stockAmount": 8
+      },
+      {
+        "name": "M",
+        "inStock": true,
+        "stockAmount": 10
+      },
+      {
+        "name": "S",
+        "inStock": true,
+        "stockAmount": 6
+      }
+    ],
+    "highlights": ["Men's Sweaters", "Cashmere", "Luxury"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Pleated Midi Skirt",
+    "price": 69.99,
+    "image": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Elegant pleated midi skirt with a flattering silhouette. Perfect for both casual and formal occasions.",
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "Navy",
+        "hex": "#000080"
+      },
+      {
+        "name": "Burgundy",
+        "hex": "#800020"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "28",
+        "inStock": true,
+        "stockAmount": 8
+      },
+      {
+        "name": "30",
+        "inStock": true,
+        "stockAmount": 10
+      },
+      {
+        "name": "32",
+        "inStock": true,
+        "stockAmount": 8
+      }
+    ],
+    "highlights": ["Women's Skirts", "Pleated", "Versatile"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Leather Loafers",
+    "price": 99.99,
+    "image": "https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Classic leather loafers with a comfortable fit. Perfect for both casual and business wear.",
+    "colors": [
+      {
+        "name": "Brown",
+        "hex": "#8b4513"
+      },
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "Tan",
+        "hex": "#d2b48c"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "42",
+        "inStock": true,
+        "stockAmount": 8
+      },
+      {
+        "name": "41",
+        "inStock": true,
+        "stockAmount": 10
+      },
+      {
+        "name": "40",
+        "inStock": true,
+        "stockAmount": 12
+      }
+    ],
+    "highlights": ["Footwear", "Leather", "Classic"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Silk Tie",
+    "price": 49.99,
+    "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Premium silk tie with a classic pattern. Perfect for formal occasions and business wear.",
+    "colors": [
+      {
+        "name": "Navy",
+        "hex": "#000080"
+      },
+      {
+        "name": "Burgundy",
+        "hex": "#800020"
+      },
+      {
+        "name": "Forest Green",
+        "hex": "#228b22"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "One Size",
+        "inStock": true,
+        "stockAmount": 15
+      }
+    ],
+    "highlights": ["Accessories", "Silk", "Formal"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  },
+  {
+    "name": "Wool Beanie",
+    "price": 29.99,
+    "image": "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&w=1200&q=100",
+    "desc": "Warm wool beanie with a classic fit. Perfect for cold weather and casual wear.",
+    "colors": [
+      {
+        "name": "Gray",
+        "hex": "#808080"
+      },
+      {
+        "name": "Black",
+        "hex": "#000000"
+      },
+      {
+        "name": "Navy",
+        "hex": "#000080"
+      }
+    ],
+    "sizes": [
+      {
+        "name": "One Size",
+        "inStock": true,
+        "stockAmount": 20
+      }
+    ],
+    "highlights": ["Accessories", "Winter", "Casual"],
+    "sellerId": "682ed650bbd91497b88e536e"
+  }
+]

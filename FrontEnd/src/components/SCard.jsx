@@ -90,8 +90,8 @@ const SCard = ({ product }) => {
 
   return (
     <div className='main-container flex justify-left items-center'>
-      <div className='relative  w-[250px] rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer'>
-        <div className='relative  h-0 pb-[75%]'>
+      <div className='relative w-[250px] rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer mt-1 pt-1'>
+        <div className='relative h-0 pb-[110%]'>
           <img
             className='absolute top-0 left-0 w-full h-full object-cover rounded-t-lg'
             src={product.image}

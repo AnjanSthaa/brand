@@ -7,10 +7,19 @@ const UCard = () => {
   const navigate = useNavigate()
   const { products, fetchProducts, loading, error } = useProductStore()
   const [feedback, setFeedback] = useState({ type: '', message: '' })
+  const [randomProducts, setRandomProducts] = useState([])
 
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
+
+  // Get 10 random products when products array changes
+  useEffect(() => {
+    if (products.length > 0) {
+      const shuffled = [...products].sort(() => 0.5 - Math.random())
+      setRandomProducts(shuffled.slice(0, 10))
+    }
+  }, [products])
 
   // Clear feedback after 3 seconds
   useEffect(() => {
@@ -74,7 +83,7 @@ const UCard = () => {
   return (
     <div className='main-container flex justify-left items-center font-poppins relative'>
       <div className='w-full grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6 px-4'>
-        {products.map((item) => (
+        {randomProducts.map((item) => (
           <div
             key={item._id}
             className='relative max-w-sm rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer'

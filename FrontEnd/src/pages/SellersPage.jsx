@@ -19,11 +19,11 @@ const SellersPage = () => {
   }, [fetchProducts, navigate])
 
   return (
-    <div className='pt-6 min-h-screen font-poppins'>
+    <div className='pt-2 min-h-screen font-poppins'>
       {/* Cards Section */}
-      <div className='w-full mt-8 px-4 max-w-screen mx-auto'>
+      <div className='w-full mt-2 px-4 max-w-screen mx-auto'>
         {/* SCard component wrapped in a flex container */}
-        <div className='flex flex-wrap gap-6 mb-6'>
+        <div className='flex flex-wrap gap-6 mb-2'>
           {products && products.length > 0 ? (
             products.map((product) => (
               <SCard key={product._id} product={product} />

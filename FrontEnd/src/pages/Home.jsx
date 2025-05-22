@@ -17,7 +17,7 @@ const Home = () => {
       <div className='cardCont'>
         <div className='Products'>
           <p className='ml-6 mt-12 text-lg font-semibold font-poppins'>
-            Products
+            Recommended Products
           </p>
           <UCard />
         </div>
