@@ -1,0 +1,58 @@
+[
+  {
+    "Name": "Leather Jacket",
+    "Price": "199.99",
+    "Image": "https://assets.teenvogue.com/photos/677e682cb726d2a2ead537fe/16:9/w_2560%2Cc_limit/2190172151",
+    "id": 1,
+    "Rating": "9.2"
+  },
+  {
+    "Name": "Silk Blouse",
+    "Price": "89.99",
+    "Image": "https://pbs.twimg.com/media/FsPHuswWAAAKVsT.jpg",
+    "id": 2,
+    "Rating": "8.7"
+  },
+  {
+    "Name": "Cotton T-Shirt",
+    "Price": "29.99",
+    "Image": "https://i.pinimg.com/736x/cb/64/97/cb64976885aab4bc57321cd43d2cb76b.jpg",
+    "id": 3,
+    "Rating": "9.0"
+  },
+  {
+    "Name": "Casual Outfit",
+    "Price": "79.99",
+    "Image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ37o3tR97dE7c2111JbiavMx7rQeLvSKVGp6bvspsQ_4teU7uXcremTMVUL4V6csR9zDo&usqp=CAU",
+    "id": 4,
+    "Rating": "8.9"
+  },
+  {
+    "Name": "Denim Jeans",
+    "Price": "69.99",
+    "Image": "https://images.squarespace-cdn.com/content/v1/55f45174e4b0fb5d95b07f39/7406f081-6584-4aae-802e-db64834f9ab7/Blackpink-Lisa-by-Gregory-Harris-ELLE-US-September-4.jpg",
+    "id": 5,
+    "Rating": "9.1"
+  },
+  {
+    "Name": "Sport Shorts",
+    "Price": "39.99",
+    "Image": "https://mastermindparis.com/wp-content/uploads/2024/12/TA_Mastermind_Mag_Shot01_270_F-1024x1280.jpg",
+    "id": 6,
+    "Rating": "8.5"
+  },
+  {
+    "Name": "Canvas Sneakers",
+    "Price": "59.99",
+    "Image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    "id": 7,
+    "Rating": "9.3"
+  },
+  {
+    "Name": "Summer Collection",
+    "Price": "149.99",
+    "Image": "https://4kwallpapers.com/images/wallpapers/jennie-blackpink-5120x5120-20421.jpg",
+    "id": 8,
+    "Rating": "9.5"
+  }
+]
