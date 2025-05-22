@@ -6,22 +6,13 @@ import { useProductStore } from '../store/product'
 const UCard = () => {
   const navigate = useNavigate()
   const { products, fetchProducts, loading, error } = useProductStore()
-  const [feedback, setFeedback] = useState({ type: '', message: '' })
-  const [randomProducts, setRandomProducts] = useState([])
   const [wishlistItems, setWishlistItems] = useState([])
+  const [feedback, setFeedback] = useState({ type: '', message: '' })
 
   useEffect(() => {
     fetchProducts()
     fetchWishlist()
   }, [fetchProducts])
-
-  // Get 10 random products when products array changes
-  useEffect(() => {
-    if (products.length > 0) {
-      const shuffled = [...products].sort(() => 0.5 - Math.random())
-      setRandomProducts(shuffled.slice(0, 10))
-    }
-  }, [products])
 
   // Clear feedback after 3 seconds
   useEffect(() => {
@@ -49,6 +40,10 @@ const UCard = () => {
     } catch (error) {
       console.error('Error fetching wishlist:', error)
     }
+  }
+
+  const handleCardClick = (productId) => {
+    navigate(`/product/${productId}`)
   }
 
   const toggleWishlist = async (productId) => {
@@ -94,17 +89,18 @@ const UCard = () => {
     }
   }
 
-  const handleCardClick = (id) => {
-    navigate(`/product/${id}`)
+  if (loading) {
+    return <div>Loading...</div>
   }
 
-  if (loading) return <p>Loading products...</p>
-  if (error) return <p>Error: {error}</p>
+  if (error) {
+    return <div>Error: {error}</div>
+  }
 
   return (
     <div className='main-container flex justify-left items-center font-poppins relative'>
       <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6 px-4'>
-        {randomProducts.map((item) => (
+        {products.map((item) => (
           <div
             key={item._id}
             className='relative max-w-sm rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer'
