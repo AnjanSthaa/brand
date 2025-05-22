@@ -5,7 +5,7 @@ export const getWishlist = async (req, res) => {
   try {
     const wishlist = await Wishlist.findOne({ userId: req.user.id }).populate(
       'items.productId',
-      'name price imageURL stockStatus'
+      'name price image stockStatus'
     ) // Populate necessary fields of the product
 
     if (!wishlist)

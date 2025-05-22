@@ -1,4 +1,3 @@
-import React from 'react'
 import Carousel from '../components/Carasol'
 import HorizontalSlider from '../components/HoriSlider'
 import UCard from '../components/UCard'

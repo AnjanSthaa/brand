@@ -1,4 +1,4 @@
-import { Heart, Plus } from 'lucide-react'
+import { Heart } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useProductStore } from '../store/product'
@@ -8,9 +8,11 @@ const UCard = () => {
   const { products, fetchProducts, loading, error } = useProductStore()
   const [feedback, setFeedback] = useState({ type: '', message: '' })
   const [randomProducts, setRandomProducts] = useState([])
+  const [wishlistItems, setWishlistItems] = useState([])
 
   useEffect(() => {
     fetchProducts()
+    fetchWishlist()
   }, [fetchProducts])
 
   // Get 10 random products when products array changes
@@ -31,43 +33,62 @@ const UCard = () => {
     }
   }, [feedback])
 
-  const addToCart = async (productId) => {
+  const fetchWishlist = async () => {
     try {
-      const response = await fetch('/api/cart', {
-        method: 'POST',
+      const token = localStorage.getItem('token')
+      if (!token) return
+
+      const response = await fetch('/api/wishlist', {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId, quantity: 1 }),
       })
-
-      if (!response.ok) {
-        throw new Error('Failed to add to cart')
-      }
-
-      setFeedback({ type: 'success', message: 'Added to cart!' })
+      if (!response.ok) throw new Error('Failed to fetch wishlist')
+      const data = await response.json()
+      setWishlistItems(data.data.items.map((item) => item.productId._id))
     } catch (error) {
-      setFeedback({ type: 'error', message: error.message })
+      console.error('Error fetching wishlist:', error)
     }
   }
 
-  const addToWishlist = async (productId) => {
+  const toggleWishlist = async (productId) => {
     try {
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setFeedback({
+          type: 'error',
+          message: 'Please login to manage wishlist',
+        })
+        return
+      }
+
+      const isInWishlist = wishlistItems.includes(productId)
+      const method = isInWishlist ? 'DELETE' : 'POST'
+
       const response = await fetch('/api/wishlist', {
-        method: 'POST',
+        method,
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ productId }),
       })
 
       if (!response.ok) {
-        throw new Error('Failed to add to wishlist')
+        const data = await response.json()
+        throw new Error(
+          data.message ||
+            `Failed to ${isInWishlist ? 'remove from' : 'add to'} wishlist`
+        )
       }
 
-      setFeedback({ type: 'success', message: 'Added to wishlist!' })
+      if (isInWishlist) {
+        setWishlistItems((prev) => prev.filter((id) => id !== productId))
+        setFeedback({ type: 'success', message: 'Removed from wishlist!' })
+      } else {
+        setWishlistItems((prev) => [...prev, productId])
+        setFeedback({ type: 'success', message: 'Added to wishlist!' })
+      }
     } catch (error) {
       setFeedback({ type: 'error', message: error.message })
     }
@@ -96,16 +117,19 @@ const UCard = () => {
                 onClick={() => handleCardClick(item._id)}
               />
               <button
-                onClick={() => addToWishlist(item._id)}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleWishlist(item._id)
+                }}
                 className='absolute bottom-2 right-2 bg-white rounded-full p-1 shadow hover:shadow-md transition-colors'
               >
-                <Heart className='w-5 h-5 text-gray-500 hover:text-red-500' />
-              </button>
-              <button
-                onClick={() => addToCart(item._id)}
-                className='absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:shadow-md'
-              >
-                <Plus className='w-5 h-5 text-gray-500' />
+                <Heart
+                  className={`w-5 h-5 transition-colors ${
+                    wishlistItems.includes(item._id)
+                      ? 'text-red-500 fill-red-500'
+                      : 'text-gray-500 hover:text-red-500'
+                  }`}
+                />
               </button>
             </div>
             <div className='mt-2 p-2 flex justify-between'>

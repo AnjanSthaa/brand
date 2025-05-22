@@ -193,7 +193,7 @@ const Profile = () => {
             <SellersPageContent />
           )
         ) : activeTab === 'wishlist' ? (
-          <div className='bg-white shadow p-6 rounded-lg'>
+          <div>
             <Wishlist />
           </div>
         ) : (
