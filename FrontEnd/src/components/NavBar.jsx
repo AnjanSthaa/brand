@@ -1,18 +1,31 @@
 import { useState, useEffect } from 'react'
 import { User, Menu, MailIcon } from 'lucide-react'
 import Cart from './Cart'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import SearchBox from './SearchBox'
 import { ShoppingCart } from 'lucide-react'
 import useAuthStore from '../store/auth'
 
 const NavBar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { user, setUser } = useAuthStore()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [highlightCart, setHighlightCart] = useState(false)
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search)
+    if (searchParams.get('highlight') === 'cart') {
+      setHighlightCart(true)
+      // Remove the highlight parameter from URL
+      navigate(location.pathname, { replace: true })
+      // Reset highlight after animation
+      setTimeout(() => setHighlightCart(false), 2000)
+    }
+  }, [location, navigate])
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -139,7 +152,9 @@ const NavBar = () => {
             {user && user.role === 'buyer' && (
               <button
                 onClick={openCart}
-                className='relative p-2 hover:bg-gray-100 rounded-full transition-colors'
+                className={`relative p-2 hover:bg-gray-100 rounded-full transition-all duration-500 ${
+                  highlightCart ? 'animate-bounce bg-black text-white' : ''
+                }`}
                 aria-label='Open cart'
               >
                 <ShoppingCart className='w-5 h-5' />
