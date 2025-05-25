@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import horiCardData from '../dataFile/horiCardData.json'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
@@ -60,12 +60,6 @@ const HorizontalSlider = () => {
 
   return (
     <div className='relative w-full px-4 sm:px-6 lg:px-8'>
-      <div className='flex items-center justify-between mb-4'>
-        <h2 className='text-2xl font-bold text-gray-900 font-poppins'>
-          Trending Now
-        </h2>
-      </div>
-
       <div className='relative group'>
         <button
           onClick={handleScrollLeft}
