@@ -3,7 +3,7 @@ import About from './pages/About'
 import ContactPage from './pages/ContactPage'
 import Profile from './pages/Profile'
 import Footer from './components/Footer'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Message from './pages/Message'
 import NavBar from './components/NavBar'
 import Shop from './pages/Shop'
@@ -18,9 +18,6 @@ import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
 
 const AppContent = () => {
-  const location = useLocation()
-  const isShopPage = location.pathname === '/shop'
-
   return (
     <div>
       <NavBar />
@@ -68,7 +65,7 @@ const AppContent = () => {
           </Routes>
         </main>
       </div>
-      {!isShopPage && <Footer />}
+      <Footer />
     </div>
   )
 }

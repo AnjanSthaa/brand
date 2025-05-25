@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <nav
       id='sidebar'
-      className='bg-white text-gray-800 p-6 w-[300px] fixed top-0 shadow-lg mt-14 pt-10 h-[calc(100vh-3.5rem)] hidden 2xl:block overflow-y-auto z-10 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400'
+      className='bg-white text-gray-800 p-6 w-full shadow-lg h-full overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400'
     >
       <div className='pt-5'>
         <h5 className='font-poppins text-2xl font-normal mb-7'>Categories</h5>

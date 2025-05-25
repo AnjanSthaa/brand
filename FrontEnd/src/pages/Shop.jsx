@@ -5,8 +5,10 @@ import UCard from '../components/UCard'
 const Shop = () => {
   return (
     <div className='flex min-h-screen bg-gray-50'>
-      <Sidebar />
-      <div className='flex-1 w-full 2xl:ml-[300px]'>
+      <div className='hidden 2xl:block w-[300px] flex-shrink-0'>
+        <Sidebar />
+      </div>
+      <div className='flex-1 w-full'>
         <Shopheader />
         <div className='pb-20'>
           <UCard />

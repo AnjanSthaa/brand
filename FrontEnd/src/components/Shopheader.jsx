@@ -23,7 +23,7 @@ function Shopheader() {
 
   return (
     <div>
-      <nav className='bg-white text-black p-4 mt-3 mb-0 pb-6 sm:pb-0 flex items-center justify-between max-w-[1400px] mx-auto'>
+      <nav className='text-black p-4 mt-3 mb-0 pb-6 sm:pb-0 flex items-center justify-between max-w-[1400px] mx-auto'>
         {/* Left section for the Products title */}
         <div className='flex justify-start'>
           <h2 className='text-xl md:text-2xl font-bold tracking-tight text-gray-900 font-poppins'>

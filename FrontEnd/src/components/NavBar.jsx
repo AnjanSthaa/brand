@@ -96,7 +96,7 @@ const NavBar = () => {
     <div className='sticky top-0 z-50 w-full bg-white shadow-md'>
       <div className='container mx-auto relative'>
         <nav className='flex items-center justify-between py-4 pr-4 font-poppins'>
-          <NavLink to='/' className='text-2xl font-bold pl-4 font-poppins'>
+          <NavLink to='/' className='text-2xl font-bold pl-10 font-poppins'>
             Brand<span className='text-primary'>.</span>
           </NavLink>
 
