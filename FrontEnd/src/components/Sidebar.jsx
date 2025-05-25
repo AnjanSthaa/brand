@@ -13,7 +13,9 @@ const Sidebar = () => {
       className='bg-white text-gray-800 p-6 w-full shadow-lg h-full overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-gray-400'
     >
       <div className='pt-5'>
-        <h5 className='font-poppins text-2xl font-normal mb-7'>Categories</h5>
+        <div className='bg-black text-white p-4 -mx-6 -mt-5 mb-7 shadow-[0_0_12px_rgba(0,0,0,0.15),0_0_12px_rgba(0,0,0,0.15),0_0_12px_rgba(0,0,0,0.15),0_0_12px_rgba(0,0,0,0.15)]'>
+          <h5 className='font-poppins text-2xl font-normal'>Categories</h5>
+        </div>
         <ul className='space-y-5'>
           {/* Men's Clothing Section */}
           <li className='relative'>
