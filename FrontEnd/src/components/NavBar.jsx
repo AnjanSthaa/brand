@@ -94,9 +94,9 @@ const NavBar = () => {
 
   return (
     <div className='sticky top-0 z-50 w-full bg-white shadow-md'>
-      <div className='container mx-auto relative'>
-        <nav className='flex items-center justify-between py-4 pr-4 font-poppins'>
-          <NavLink to='/' className='text-2xl font-bold pl-10 font-poppins'>
+      <div className='container mx-auto relative max-w-full px-4'>
+        <nav className='flex items-center justify-between py-4 font-poppins'>
+          <NavLink to='/' className='text-2xl font-bold font-poppins'>
             Brand<span className='text-primary'>.</span>
           </NavLink>
 
@@ -174,8 +174,8 @@ const NavBar = () => {
         {searchOpen && <SearchBox toggleSearch={toggleSearch} />}
 
         {isMenuOpen && (
-          <div className='lg:hidden mt-2 py-2 bg-white border-t font-poppins'>
-            <ul className='space-y-2'>
+          <div className='lg:hidden fixed inset-x-0 top-[60px] bg-white border-t font-poppins shadow-lg'>
+            <ul className='space-y-2 py-2'>
               <li>
                 <NavLink
                   to='/shop'

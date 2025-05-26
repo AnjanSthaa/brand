@@ -89,9 +89,9 @@ const SCard = ({ product }) => {
   const isMinusDisabled = (key) => updatedProduct[key].length === 1
 
   return (
-    <div className='main-container flex justify-left items-center'>
-      <div className='relative w-[250px] rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer mt-1 pt-1'>
-        <div className='relative h-0 pb-[110%]'>
+    <div className='main-container flex justify-center items-center'>
+      <div className='relative w-full rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer mt-1 pt-1'>
+        <div className='relative h-0 pb-[100%]'>
           <img
             className='absolute top-0 left-0 w-full h-full object-cover rounded-t-lg'
             src={product.image}
@@ -99,21 +99,23 @@ const SCard = ({ product }) => {
             onClick={() => handleCardClick(product._id)}
           />
           <button
-            className='absolute top-2 right-2 bg-white rounded-full p-1 shadow hover:shadow-md'
+            className='absolute top-1 right-1 sm:top-2 sm:right-2 bg-white rounded-full p-0.5 sm:p-1 shadow hover:shadow-md'
             onClick={() => openDeleteDialog(product)}
           >
-            <Minus className='w-5 h-5 text-gray-500' />
+            <Minus className='w-3 h-3 sm:w-4 sm:h-4 text-gray-500' />
           </button>
           <button
-            className='absolute bottom-2 right-2 bg-white rounded-full p-1 shadow hover:shadow-md'
+            className='absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-white rounded-full p-0.5 sm:p-1 shadow hover:shadow-md'
             onClick={() => openEditDialog(product)}
           >
-            <Edit className='w-5 h-5 text-gray-500 hover:text-blue-500' />
+            <Edit className='w-3 h-3 sm:w-4 sm:h-4 text-gray-500 hover:text-blue-500' />
           </button>
         </div>
-        <div className='mt-2 p-2 flex flex-col'>
-          <h3 className='text-sm text-gray-700 pl-2'>{product.name}</h3>
-          <p className='text-sm font-bold text-gray-900 pl-2 pt-2'>
+        <div className='mt-1 sm:mt-2 p-1 sm:p-2 flex flex-col'>
+          <h3 className='text-xs sm:text-sm text-gray-700 pl-1 sm:pl-2 truncate'>
+            {product.name}
+          </h3>
+          <p className='text-xs sm:text-sm font-bold text-gray-900 pl-1 sm:pl-2 pt-1 sm:pt-2'>
             Rs. {product.price}
           </p>
         </div>

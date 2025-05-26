@@ -105,7 +105,7 @@ const Wishlist = () => {
   return (
     <div className='pt-2 min-h-screen font-poppins'>
       <div className='w-full mt-2 px-4 max-w-screen mx-auto'>
-        <div className='flex flex-wrap gap-6 mb-2'>
+        <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mb-2'>
           {items.map((item) => {
             console.log('Item being rendered:', item) // Debug log
             return (

@@ -1,10 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import cardData from '../dataFile/cardData.json'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+  const carouselRef = useRef(null)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkIfMobile()
+
+    // Add event listener for window resize
+    window.addEventListener('resize', checkIfMobile)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
 
   useEffect(() => {
     if (!isHovered) {
@@ -37,27 +56,61 @@ const Carousel = () => {
     setCurrentIndex(index)
   }
 
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) {
+      nextSlide()
+    }
+    if (isRightSwipe) {
+      prevSlide()
+    }
+
+    setTouchStart(null)
+    setTouchEnd(null)
+  }
+
   return (
     <div
+      ref={carouselRef}
       className='relative w-full h-[536px] overflow-hidden sm:mt-0'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className='absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110'
-        aria-label='Previous slide'
-      >
-        <ChevronLeft className='w-6 h-6' />
-      </button>
-      <button
-        onClick={nextSlide}
-        className='absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110'
-        aria-label='Next slide'
-      >
-        <ChevronRight className='w-6 h-6' />
-      </button>
+      {/* Navigation Arrows - Hidden on Mobile */}
+      {!isMobile && (
+        <>
+          <button
+            onClick={prevSlide}
+            className='absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110'
+            aria-label='Previous slide'
+          >
+            <ChevronLeft className='w-6 h-6' />
+          </button>
+          <button
+            onClick={nextSlide}
+            className='absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110'
+            aria-label='Next slide'
+          >
+            <ChevronRight className='w-6 h-6' />
+          </button>
+        </>
+      )}
 
       {/* Slides */}
       {cardData.map((card, index) => (

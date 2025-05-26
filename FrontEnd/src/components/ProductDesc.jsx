@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useProductStore } from '../store/product'
 import { useEffect, useState } from 'react'
-import { ShoppingBag } from 'lucide-react'
+import { ShoppingBag, Plus, Minus } from 'lucide-react'
 
 export default function ProductDesc() {
   const { products, fetchProducts, loading } = useProductStore()
@@ -182,36 +182,57 @@ export default function ProductDesc() {
               </ul>
             </div>
 
-            <div className='flex items-center gap-4 pt-4'>
+            <div className='flex flex-col gap-4 pt-4'>
               <div className='flex items-center gap-2'>
                 <label className='text-sm font-medium text-gray-700'>
                   Quantity:
                 </label>
-                <select
-                  value={quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value))}
-                  className='border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-300 focus:border-black'
-                >
-                  {[...Array(10)].map((_, i) => (
-                    <option key={i + 1} value={i + 1}>
-                      {i + 1}
-                    </option>
-                  ))}
-                </select>
+                <div className='flex items-center border border-gray-300 rounded-lg'>
+                  <button
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    className='px-3 py-2 hover:bg-gray-100 transition-colors rounded-l-lg'
+                    disabled={quantity <= 1}
+                  >
+                    <Minus className='w-4 h-4' />
+                  </button>
+                  <input
+                    type='number'
+                    min='1'
+                    max='10'
+                    value={quantity}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value)
+                      if (value >= 1 && value <= 10) {
+                        setQuantity(value)
+                      }
+                    }}
+                    className='w-12 text-center border-x border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-gray-300'
+                  />
+                  <button
+                    onClick={() =>
+                      setQuantity((prev) => Math.min(10, prev + 1))
+                    }
+                    className='px-3 py-2 hover:bg-gray-100 transition-colors rounded-r-lg'
+                    disabled={quantity >= 10}
+                  >
+                    <Plus className='w-4 h-4' />
+                  </button>
+                </div>
               </div>
 
-              <div className='flex gap-3 flex-1'>
+              <div className='flex flex-row gap-3'>
                 <button
                   onClick={addToCart}
                   disabled={!selectedSize}
-                  className='w-[45%] bg-black hover:bg-white hover:text-black text-white px-6 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed'
+                  className='w-[120px] md:w-[45%] bg-black hover:bg-white hover:text-black text-white px-6 py-2 rounded-lg shadow flex items-center justify-center focus:ring-2 focus:ring-gray-300 transition border border-black disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed'
                 >
-                  Add to Cart
+                  <span className='hidden md:inline'>Add to Cart</span>
+                  <ShoppingBag className='w-5 h-5 md:hidden mx-auto' />
                 </button>
 
                 <button
                   onClick={() => navigate(-1)}
-                  className='w-[45%] bg-black hover:bg-white hover:text-black text-white px-6 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
+                  className='w-[120px] md:w-[45%] bg-black hover:bg-white hover:text-black text-white px-6 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
                 >
                   Go Back
                 </button>

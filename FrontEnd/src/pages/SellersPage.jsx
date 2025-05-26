@@ -21,15 +21,17 @@ const SellersPage = () => {
   return (
     <div className='pt-2 min-h-screen font-poppins'>
       {/* Cards Section */}
-      <div className='w-full mt-2 px-4 max-w-screen mx-auto'>
-        {/* SCard component wrapped in a flex container */}
-        <div className='flex flex-wrap gap-6 mb-2'>
+      <div className='w-full mt-2 px-2 sm:px-4 max-w-screen mx-auto'>
+        {/* SCard component wrapped in a grid container */}
+        <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 sm:gap-4 md:gap-6 mb-2'>
           {products && products.length > 0 ? (
             products.map((product) => (
               <SCard key={product._id} product={product} />
             ))
           ) : (
-            <p>No products available</p>
+            <p className='text-sm sm:text-base text-gray-600 w-full text-center col-span-full'>
+              No products available
+            </p>
           )}
         </div>
       </div>

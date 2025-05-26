@@ -93,8 +93,8 @@ export default function Cart({ open, onClose }) {
       role='dialog'
       aria-modal='true'
     >
-      <div className='bg-white rounded-lg shadow-lg w-full max-w-2xl p-8 mx-4'>
-        <div className='flex justify-between items-center border-b pb-6'>
+      <div className='bg-white rounded-lg shadow-lg w-full max-w-2xl mx-4 flex flex-col max-h-[90vh]'>
+        <div className='flex justify-between items-center border-b p-6'>
           <h2 className='text-2xl font-semibold'>Shopping Cart</h2>
           <button
             onClick={onClose}
@@ -104,7 +104,7 @@ export default function Cart({ open, onClose }) {
           </button>
         </div>
 
-        <div className='mt-6 max-h-[60vh] overflow-y-auto'>
+        <div className='flex-1 overflow-y-auto p-6'>
           {loading && (
             <div className='text-center py-8 text-gray-600'>
               Loading cart...
@@ -125,21 +125,21 @@ export default function Cart({ open, onClose }) {
               {products.map((product) => (
                 <div
                   key={product.productId._id}
-                  className='flex items-center gap-6 py-4 border-b last:border-none'
+                  className='flex items-center gap-4 md:gap-6 py-4 border-b last:border-none'
                 >
                   <img
                     src={product.productId.image}
                     alt={product.productId.name}
-                    className='w-28 h-28 object-cover rounded-md'
+                    className='w-20 h-20 md:w-28 md:h-28 object-cover rounded-md'
                   />
                   <div className='flex-grow'>
-                    <h3 className='text-lg font-medium text-gray-900'>
+                    <h3 className='text-base md:text-lg font-medium text-gray-900'>
                       {product.productId.name}
                     </h3>
-                    <p className='text-base text-gray-500 mt-1'>
+                    <p className='text-sm md:text-base text-gray-500 mt-1'>
                       Quantity: {product.quantity}
                     </p>
-                    <p className='text-lg font-semibold text-gray-900 mt-2'>
+                    <p className='text-base md:text-lg font-semibold text-gray-900 mt-2'>
                       Rs.
                       {(product.productId.price * product.quantity).toFixed(2)}
                     </p>
@@ -149,7 +149,7 @@ export default function Cart({ open, onClose }) {
                     className='p-2 text-gray-400 hover:text-red-600 transition-colors'
                     aria-label='Remove item'
                   >
-                    <XIcon className='w-5 h-5' />
+                    <XIcon className='w-4 h-4 md:w-5 md:h-5' />
                   </button>
                 </div>
               ))}
@@ -158,28 +158,40 @@ export default function Cart({ open, onClose }) {
         </div>
 
         {!loading && !error && products.length > 0 && (
-          <div className='mt-8 space-y-4'>
+          <div className='border-t p-6 space-y-4'>
+            <div>
+              <div className='flex justify-between items-center text-base md:text-lg'>
+                <span className='font-medium'>Total Items:</span>
+                <span className='font-semibold'>{products.length}</span>
+              </div>
+              <div className='flex justify-between items-center mt-2 text-base md:text-lg'>
+                <span className='font-medium'>Total Amount:</span>
+                <span className='font-semibold'>
+                  Rs.{' '}
+                  {products
+                    .reduce(
+                      (total, item) =>
+                        total + item.productId.price * item.quantity,
+                      0
+                    )
+                    .toFixed(2)}
+                </span>
+              </div>
+            </div>
+
             <div className='flex gap-3 justify-end'>
               <button
                 onClick={handleCheckout}
-                className='w-[29%] bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
+                className='w-[120px] md:w-[29%] bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
               >
-                Checkout
+                <span className='hidden md:inline'>Checkout</span>
+                <span className='md:hidden'>Buy</span>
               </button>
               <button
                 onClick={clearCart}
-                className='w-[9%] bg-red-600 hover:bg-white hover:text-red-600 text-white px-4 py-2 rounded-lg shadow flex items-center justify-center focus:ring-2 focus:ring-red-300 transition border border-red-600'
+                className='w-[50px] md:w-[9%] bg-red-600 hover:bg-white hover:text-red-600 text-white px-4 py-2 rounded-lg shadow flex items-center justify-center focus:ring-2 focus:ring-red-300 transition border border-red-600'
               >
                 <Trash2 className='w-5 h-5' />
-              </button>
-            </div>
-
-            <div className='flex justify-end'>
-              <button
-                onClick={onClose}
-                className='w-[40%] bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center justify-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
-              >
-                Continue Shopping
               </button>
             </div>
           </div>

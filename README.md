@@ -11,13 +11,23 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Custom shadows and visual effects
 - Black-themed sections with shadow effects
 
+### Responsive Design
+
+- Mobile-first approach
+- Breakpoint-specific layouts
+- Adaptive navigation
+- Touch-friendly interfaces
+
 ### 2. Home Page
 
 - Hero carousel showcasing featured products
 - Trending section with black background and shadow effects
 - Horizontal product slider
 - Recommended products section with decorative dividers
-  ![Home Page](path/to/home-page-screenshot.png)
+  ![Home Page](BrandImg/Jenhomepg.png)
+  ![Mobile View](BrandImg/homeMobile.png)
+  ![Home Page2](BrandImg/lowerhomepg.png)
+  ![Mobile View](BrandImg/mobilehome2.png)
 
 ### 3. Shop Page
 
@@ -26,15 +36,23 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Product grid with hover effects
 - Search functionality
 - Sort by options
-  ![Shop Page](path/to/shop-page-screenshot.png)
+  ![Shop Page](BrandImg/Shop.png)
+  ![Mobile View](BrandImg/shopmobile.png)
+  ![Mobile View](BrandImg/filtermobile.png)
+  ![Mobile View](BrandImg/searchmobile.png)
 
-### 4. Product Features
+## 4. Shopping Features
 
-- Product cards with hover animations
-- Wishlist functionality
-- Price and size information
-- Add to cart functionality
-  ![Product Cards](path/to/product-cards-screenshot.png)
+- Product filtering
+- Search functionality
+- Sort options
+- Wishlist
+- Shopping cart
+- Checkout process
+  ![Product desc](BrandImg/productdesc.png)
+  ![Mobile View](BrandImg/pdescmobile.png)
+  ![Shopping Cart](BrandImg/DesktopCart.png)
+  ![Mobile View](BrandImg/Mobilecart.png)
 
 ### 5. User Features
 
@@ -43,14 +61,19 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Wishlist management
 - Order history
 - Role-based access (Buyer/Seller)
-  ![User Profile](path/to/user-profile-screenshot.png)
+  ![Login](BrandImg/login.png)
+  ![Mobile View](BrandImg/loginMobile.png)
+
+  ![User Profile](BrandImg/Profile.png)
+  ![Mobile View](BrandImg/bpgmobile.png)
 
 ### 6. Seller Features
 
 - Product management
 - Order management
 - Inventory tracking
-  ![Seller Dashboard](path/to/seller-dashboard-screenshot.png)
+  ![Seller Dashboard](BrandImg/seller.png)
+  ![Mobile View](BrandImg/spgmobile.png)
 
 ## 🛠️ Technical Stack
 
@@ -124,37 +147,12 @@ npm run dev
 - Hover animations on product cards
 - Smooth transitions for category menus
 
-### Responsive Design
-
-- Mobile-first approach
-- Breakpoint-specific layouts
-- Adaptive navigation
-- Touch-friendly interfaces
-
 ## 🔒 Security Features
 
 - JWT Authentication
 - Protected Routes
 - Secure API endpoints
 - Input validation
-
-## 📱 Mobile Responsiveness
-
-- Responsive navigation
-- Mobile-optimized product grid
-- Touch-friendly interfaces
-- Adaptive layouts
-  ![Mobile View](path/to/mobile-view-screenshot.png)
-
-## 🛍️ Shopping Features
-
-- Product filtering
-- Search functionality
-- Sort options
-- Wishlist
-- Shopping cart
-- Checkout process
-  ![Shopping Cart](path/to/shopping-cart-screenshot.png)
 
 ## 👥 User Roles
 
@@ -173,32 +171,7 @@ npm run dev
 - Manage inventory
 - Update profile
 
-## 🔄 Future Enhancements
+## Made in Collaboration by:
 
-- [ ] Advanced search filters
-- [ ] Product reviews and ratings
-- [ ] Social media integration
-- [ ] Payment gateway integration
-- [ ] Real-time chat support
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-[Your Name]
-
-## 🙏 Acknowledgments
-
-- [List any acknowledgments]
-- [Credits for any third-party resources]
-- [Special thanks to contributors]
+[Anjan Shrestha]
+[Aayush Kakshapati]

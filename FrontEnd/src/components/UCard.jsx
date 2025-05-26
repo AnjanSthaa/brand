@@ -102,41 +102,52 @@ const UCard = () => {
   }
 
   return (
-    <div className='main-container flex justify-left items-center font-poppins relative'>
-      <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 my-6 px-4'>
+    <div className='w-full font-poppins relative'>
+      <div className='w-full p-4 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-1.5 sm:gap-3 md:gap-4 my-4'>
         {products.map((item) => (
           <div
             key={item._id}
-            className='relative max-w-sm rounded-lg overflow-hidden shadow-md bg-white transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer'
+            className='group relative overflow-hidden shadow-md bg-black transition-transform duration-200 hover:shadow-lg hover:scale-105 cursor-pointer'
           >
-            <div className='relative h-0 pb-[75%]'>
+            <div className='relative h-0 pb-[100%]'>
               <img
-                className='absolute top-0 left-0 w-full h-full object-cover rounded-t-lg'
+                className='absolute top-0 left-0 w-full h-full object-cover'
                 src={item.image}
                 alt={item.name}
                 onClick={() => handleCardClick(item._id)}
               />
+              {/* Overlay for name and price */}
+              <div
+                className='
+                  absolute bottom-0 left-0 w-full
+                  bg-gradient-to-t from-black/80 to-transparent
+                  px-2 py-2
+                  flex flex-col
+                  opacity-100
+                '
+              >
+                <h3 className='text-xs sm:text-sm text-white font-semibold truncate'>
+                  {item.name}
+                </h3>
+                <p className='text-xs sm:text-sm text-white font-bold'>
+                  Rs.{item.price}
+                </p>
+              </div>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   toggleWishlist(item._id)
                 }}
-                className='absolute bottom-2 right-2 p-1 transition-colors'
+                className='absolute top-1 right-1 sm:top-2 sm:right-2 p-0.5 sm:p-1 transition-colors z-10'
               >
                 <Heart
-                  className={`w-5 h-5 transition-colors ${
+                  className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors ${
                     wishlistItems.includes(item._id)
-                      ? 'text-red-500 fill-red-500'
-                      : 'text-gray-500 hover:text-red-500'
+                      ? 'text-red-500 fill-red-500 stroke-black stroke-[1.5]'
+                      : 'text-black fill-black stroke-white stroke-[1.5]'
                   }`}
                 />
               </button>
-            </div>
-            <div className='mt-2 p-2 flex justify-between items-center'>
-              <p className='text-sm font-bold'>Rs.{item.price}</p>
-              <h3 className='text-sm text-gray-700 truncate max-w-[60%]'>
-                {item.name}
-              </h3>
             </div>
           </div>
         ))}
@@ -145,7 +156,7 @@ const UCard = () => {
       {/* Feedback Message */}
       {feedback.message && (
         <div
-          className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out ${
+          className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 sm:px-6 sm:py-3 rounded-lg shadow-lg z-50 transition-all duration-300 ease-in-out text-sm sm:text-base ${
             feedback.type === 'success' ? 'bg-green-500' : 'bg-red-500'
           } text-white`}
         >
