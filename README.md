@@ -24,6 +24,7 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Trending section with black background and shadow effects
 - Horizontal product slider
 - Recommended products section with decorative dividers
+
   ![Home Page](BrandImg/Jenhomepg.png)
   ![Mobile View](BrandImg/homeMobile.png)
   ![Home Page2](BrandImg/lowerhomepg.png)
@@ -36,6 +37,7 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Product grid with hover effects
 - Search functionality
 - Sort by options
+
   ![Shop Page](BrandImg/Shop.png)
   ![Mobile View](BrandImg/shopmobile.png)
   ![Mobile View](BrandImg/filtermobile.png)
@@ -49,6 +51,7 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Wishlist
 - Shopping cart
 - Checkout process
+
   ![Product desc](BrandImg/productdesc.png)
   ![Mobile View](BrandImg/pdescmobile.png)
   ![Shopping Cart](BrandImg/DesktopCart.png)
@@ -61,6 +64,7 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Wishlist management
 - Order history
 - Role-based access (Buyer/Seller)
+
   ![Login](BrandImg/login.png)
   ![Mobile View](BrandImg/loginMobile.png)
 
@@ -72,6 +76,7 @@ A responsive e-commerce platform built with React and Tailwind CSS, featuring a 
 - Product management
 - Order management
 - Inventory tracking
+
   ![Seller Dashboard](BrandImg/seller.png)
   ![Mobile View](BrandImg/spgmobile.png)
 
@@ -173,5 +178,19 @@ npm run dev
 
 ## Made in Collaboration by:
 
-[Anjan Shrestha]
-[Aayush Kakshapati]
+Anjan Shrestha & Aayush Kakshapati
+
+## 📄 License
+
+Copyright © 2024 Anjan Shrestha & Aayush Kakshapati. All rights reserved.
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Legal Notice
+
+This software and its documentation are protected by copyright law. Unauthorized copying, distribution, or use of this software, via any medium, is strictly prohibited. All rights are reserved by the copyright holders.
+
+For licensing inquiries, please contact:
+
+- Anjan Shrestha
+- Aayush Kakshapati
