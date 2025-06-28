@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import PaymentMethodSelector from '../components/PaymentMethodSelector'
 
 const OrderConfirmation = () => {
   const { orderId } = useParams()
@@ -7,6 +8,9 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('')
+  const [processingPayment, setProcessingPayment] = useState(false)
+  const [paymentError, setPaymentError] = useState(null)
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -37,6 +41,101 @@ const OrderConfirmation = () => {
       fetchOrder()
     }
   }, [orderId])
+
+  const handlePaymentMethodSelect = (method) => {
+    setSelectedPaymentMethod(method)
+    setPaymentError(null)
+  }
+
+  const handleCashOnDelivery = async () => {
+    setProcessingPayment(true)
+    setPaymentError(null)
+
+    try {
+      const response = await fetch('/api/orders/process-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          orderId: order._id,
+          paymentMethod: 'cash_on_delivery',
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to process payment')
+      }
+
+      // Redirect to success page
+      navigate(`/payment-success?orderId=${order._id}&method=cash_on_delivery`)
+    } catch (err) {
+      setPaymentError(err.message)
+    } finally {
+      setProcessingPayment(false)
+    }
+  }
+
+  const handleEsewaPayment = async () => {
+    setProcessingPayment(true)
+    setPaymentError(null)
+
+    try {
+      // Initiate eSewa payment
+      const response = await fetch('/api/payment/esewa/initiate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({
+          orderId: order._id,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to initiate eSewa payment')
+      }
+
+      // Create hidden form for eSewa submission
+      const form = document.createElement('form')
+      form.method = 'POST'
+      form.action = data.paymentUrl
+      form.style.display = 'none'
+
+      // Add fields in required order
+      const addField = (name, value) => {
+        const input = document.createElement('input')
+        input.type = 'hidden'
+        input.name = name
+        input.value = value
+        form.appendChild(input)
+      }
+
+      addField('amount', data.params.amount)
+      addField('tax_amount', data.params.tax_amount)
+      addField('total_amount', data.params.total_amount)
+      addField('transaction_uuid', data.params.transaction_uuid)
+      addField('product_code', data.params.product_code)
+      addField('product_service_charge', data.params.product_service_charge)
+      addField('product_delivery_charge', data.params.product_delivery_charge)
+      addField('signed_field_names', data.params.signed_field_names)
+      addField('signature', data.params.signature)
+      addField('success_url', data.params.success_url)
+      addField('failure_url', data.params.failure_url)
+
+      document.body.appendChild(form)
+      form.submit()
+    } catch (err) {
+      setPaymentError(err.message)
+      setProcessingPayment(false)
+    }
+  }
 
   const handleContinueShopping = () => {
     navigate('/')
@@ -82,187 +181,264 @@ const OrderConfirmation = () => {
             Order Confirmed!
           </h1>
           <p className='text-gray-300 text-lg max-w-2xl'>
-            Thank you for your purchase. Your order has been successfully
-            placed.
+            Your order has been placed successfully. Now choose your preferred
+            payment method.
           </p>
         </div>
       </div>
 
       <div className='container mx-auto px-4 py-16'>
-        <div className='max-w-3xl mx-auto'>
-          {/* Order Details Card */}
-          <div className='bg-white rounded-lg shadow-lg p-8 mb-8'>
-            <div className='flex items-center justify-center mb-8'>
-              <div className='w-16 h-16 bg-black rounded-full flex items-center justify-center'>
-                <svg
-                  className='w-8 h-8 text-white'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M5 13l4 4L19 7'
-                  />
-                </svg>
-              </div>
-            </div>
-            <h2 className='text-2xl font-bold text-center mb-6'>
-              Order #{order._id}
-            </h2>
-            <div className='space-y-4'>
-              <div className='flex justify-between py-2 border-b border-gray-200'>
-                <span className='text-gray-600'>Order Date</span>
-                <span className='font-medium'>
-                  {new Date(order.createdAt).toLocaleDateString()}
-                </span>
-              </div>
-              <div className='flex justify-between py-2 border-b border-gray-200'>
-                <span className='text-gray-600'>Total Amount</span>
-                <span className='font-medium'>
-                  ${order.totalAmount.toFixed(2)}
-                </span>
-              </div>
-              <div className='flex justify-between py-2 border-b border-gray-200'>
-                <span className='text-gray-600'>Payment Method</span>
-                <span className='font-medium'>{order.paymentMethod}</span>
-              </div>
-              <div className='flex justify-between py-2 border-b border-gray-200'>
-                <span className='text-gray-600'>Shipping Address</span>
-                <span className='font-medium text-right'>
-                  {order.shippingAddress.street}
-                  <br />
-                  {order.shippingAddress.city}, {order.shippingAddress.state}{' '}
-                  {order.shippingAddress.zipCode}
-                  <br />
-                  {order.shippingAddress.country}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Order Items */}
-          <div className='bg-white rounded-lg shadow-lg p-8 mb-8'>
-            <h2 className='text-2xl font-bold mb-6'>Order Items</h2>
-            <div className='space-y-6'>
-              {order.items.map((item) => (
-                <div key={item._id} className='flex items-center space-x-4'>
-                  <div className='w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0'>
-                    {item.productId.image && (
-                      <img
-                        src={item.productId.image}
-                        alt={item.productId.name}
-                        className='w-full h-full object-cover rounded-lg'
+        <div className='max-w-4xl mx-auto'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
+            {/* Order Details */}
+            <div className='space-y-8'>
+              {/* Order Details Card */}
+              <div className='bg-white rounded-lg shadow-lg p-8'>
+                <div className='flex items-center justify-center mb-8'>
+                  <div className='w-16 h-16 bg-black rounded-full flex items-center justify-center'>
+                    <svg
+                      className='w-8 h-8 text-white'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M5 13l4 4L19 7'
                       />
+                    </svg>
+                  </div>
+                </div>
+                <h2 className='text-2xl font-bold text-center mb-6'>
+                  Order #{order._id}
+                </h2>
+                <div className='space-y-4'>
+                  <div className='flex justify-between py-2 border-b border-gray-200'>
+                    <span className='text-gray-600'>Order Date</span>
+                    <span className='font-medium'>
+                      {new Date(order.createdAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className='flex justify-between py-2 border-b border-gray-200'>
+                    <span className='text-gray-600'>Total Amount</span>
+                    <span className='font-medium'>
+                      Rs. {order.totalAmount.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className='flex justify-between py-2 border-b border-gray-200'>
+                    <span className='text-gray-600'>Payment Status</span>
+                    <span className='font-medium capitalize'>
+                      {order.paymentMethod === 'pending'
+                        ? 'Pending Payment'
+                        : order.paymentMethod}
+                    </span>
+                  </div>
+                  <div className='flex justify-between py-2 border-b border-gray-200'>
+                    <span className='text-gray-600'>Shipping Address</span>
+                    <span className='font-medium text-right'>
+                      {order.shippingAddress.street}
+                      <br />
+                      {order.shippingAddress.city},{' '}
+                      {order.shippingAddress.state}{' '}
+                      {order.shippingAddress.zipCode}
+                      <br />
+                      {order.shippingAddress.country}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Order Items */}
+              <div className='bg-white rounded-lg shadow-lg p-8'>
+                <h2 className='text-2xl font-bold mb-6'>Order Items</h2>
+                <div className='space-y-6'>
+                  {order.items.map((item) => (
+                    <div key={item._id} className='flex items-center space-x-4'>
+                      <div className='w-20 h-20 bg-gray-100 rounded-lg flex-shrink-0'>
+                        {item.productId.image && (
+                          <img
+                            src={item.productId.image}
+                            alt={item.productId.name}
+                            className='w-full h-full object-cover rounded-lg'
+                          />
+                        )}
+                      </div>
+                      <div className='flex-1'>
+                        <h3 className='font-medium text-gray-900'>
+                          {item.productId.name}
+                        </h3>
+                        <p className='text-sm text-gray-500'>
+                          Quantity: {item.quantity}
+                        </p>
+                        <p className='text-gray-900 font-medium'>
+                          Rs. {item.price.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Payment Method Selection */}
+            <div className='space-y-8'>
+              <div className='bg-white rounded-lg shadow-lg p-8'>
+                <h2 className='text-2xl font-bold mb-6'>
+                  Choose Payment Method
+                </h2>
+
+                {paymentError && (
+                  <div className='mb-6 p-4 bg-red-50 border border-red-200 rounded-lg'>
+                    <p className='text-red-600'>{paymentError}</p>
+                  </div>
+                )}
+
+                <PaymentMethodSelector
+                  onSelectPaymentMethod={handlePaymentMethodSelect}
+                  selectedMethod={selectedPaymentMethod}
+                />
+
+                {/* Payment Action Buttons */}
+                {selectedPaymentMethod && (
+                  <div className='mt-8 space-y-4'>
+                    {selectedPaymentMethod === 'cash_on_delivery' && (
+                      <button
+                        onClick={handleCashOnDelivery}
+                        disabled={processingPayment}
+                        className={`w-full bg-black text-white py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
+                          processingPayment
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'hover:bg-gray-800 hover:shadow-lg transform hover:scale-[1.02]'
+                        }`}
+                      >
+                        {processingPayment ? (
+                          <div className='flex items-center justify-center space-x-3'>
+                            <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white'></div>
+                            <span>Processing...</span>
+                          </div>
+                        ) : (
+                          <div className='flex items-center justify-center space-x-3'>
+                            <svg
+                              className='w-6 h-6'
+                              fill='none'
+                              stroke='currentColor'
+                              viewBox='0 0 24 24'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z'
+                              />
+                            </svg>
+                            <span>
+                              Pay Cash on Delivery - Rs.{' '}
+                              {order.totalAmount.toFixed(2)}
+                            </span>
+                          </div>
+                        )}
+                      </button>
+                    )}
+
+                    {selectedPaymentMethod === 'esewa' && (
+                      <button
+                        onClick={handleEsewaPayment}
+                        disabled={processingPayment}
+                        className={`w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold text-lg transition-all duration-200 ${
+                          processingPayment
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'hover:bg-green-700 hover:shadow-lg transform hover:scale-[1.02]'
+                        }`}
+                      >
+                        {processingPayment ? (
+                          <div className='flex items-center justify-center space-x-3'>
+                            <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-white'></div>
+                            <span>Redirecting to eSewa...</span>
+                          </div>
+                        ) : (
+                          <div className='flex items-center justify-center space-x-3'>
+                            <div className='w-6 h-6 bg-white rounded flex items-center justify-center'>
+                              <span className='text-green-600 text-sm font-bold'>
+                                e
+                              </span>
+                            </div>
+                            <span>
+                              Pay with eSewa - Rs.{' '}
+                              {order.totalAmount.toFixed(2)}
+                            </span>
+                          </div>
+                        )}
+                      </button>
                     )}
                   </div>
-                  <div className='flex-1'>
-                    <h3 className='font-medium text-gray-900'>
-                      {item.productId.name}
-                    </h3>
-                    <p className='text-sm text-gray-500'>
-                      Quantity: {item.quantity}
-                    </p>
-                    <p className='text-gray-900 font-medium'>
-                      ${item.price.toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                )}
 
-          {/* Next Steps */}
-          <div className='bg-white rounded-lg shadow-lg p-8'>
-            <h2 className='text-2xl font-bold mb-6'>Next Steps</h2>
-            <div className='space-y-6'>
-              <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0'>
-                  <svg
-                    className='w-6 h-6 text-gray-600'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4'
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className='font-semibold text-gray-900'>
-                    Order Confirmation Email
+                {/* Order Status Info */}
+                <div className='mt-8 bg-blue-50 p-6 rounded-lg'>
+                  <h3 className='font-semibold text-blue-900 mb-4'>
+                    What happens next?
                   </h3>
-                  <p className='text-gray-600'>
-                    We&apos;ve sent a confirmation email with your order
-                    details.
-                  </p>
-                </div>
-              </div>
-              <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0'>
-                  <svg
-                    className='w-6 h-6 text-gray-600'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className='font-semibold text-gray-900'>
-                    Order Processing
-                  </h3>
-                  <p className='text-gray-600'>
-                    Your order will be processed within 1-2 business days.
-                  </p>
-                </div>
-              </div>
-              <div className='flex items-start space-x-4'>
-                <div className='w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0'>
-                  <svg
-                    className='w-6 h-6 text-gray-600'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4'
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className='font-semibold text-gray-900'>
-                    Shipping Updates
-                  </h3>
-                  <p className='text-gray-600'>
-                    You&apos;ll receive shipping updates via email once your
-                    order is on its way.
-                  </p>
+                  <div className='space-y-3'>
+                    <div className='flex items-start space-x-3'>
+                      <div className='w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                        <span className='text-sm font-bold text-blue-600'>
+                          1
+                        </span>
+                      </div>
+                      <div>
+                        <p className='text-blue-800 font-medium'>
+                          Complete Payment
+                        </p>
+                        <p className='text-blue-600 text-sm'>
+                          Choose and complete your preferred payment method.
+                        </p>
+                      </div>
+                    </div>
+                    <div className='flex items-start space-x-3'>
+                      <div className='w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                        <span className='text-sm font-bold text-blue-600'>
+                          2
+                        </span>
+                      </div>
+                      <div>
+                        <p className='text-blue-800 font-medium'>
+                          Stock Reserved
+                        </p>
+                        <p className='text-blue-600 text-sm'>
+                          Product stock will be reserved after payment
+                          confirmation.
+                        </p>
+                      </div>
+                    </div>
+                    <div className='flex items-start space-x-3'>
+                      <div className='w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                        <span className='text-sm font-bold text-blue-600'>
+                          3
+                        </span>
+                      </div>
+                      <div>
+                        <p className='text-blue-800 font-medium'>
+                          Order Processing
+                        </p>
+                        <p className='text-blue-600 text-sm'>
+                          Your order will be processed and shipped within 1-2
+                          business days.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className='flex flex-col sm:flex-row gap-4 mt-8'>
+          <div className='flex flex-col sm:flex-row gap-4 mt-8 justify-center'>
             <button
               onClick={handleContinueShopping}
-              className='bg-black hover:bg-white hover:text-black text-white px-4 py-2 rounded-lg shadow flex items-center space-x-2 focus:ring-2 focus:ring-gray-300 transition border border-black'
+              className='bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors'
             >
               Continue Shopping
             </button>

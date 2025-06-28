@@ -1,7 +1,9 @@
 import express from 'express'
 import {
   createOrder,
+  processPayment,
   getOrders,
+  getPendingOrders,
   getSellerOrders,
   updateOrderStatus,
   getOrderStatus,
@@ -13,7 +15,9 @@ const router = express.Router()
 
 // Buyer routes
 router.post('/', protect, createOrder)
+router.post('/process-payment', protect, processPayment)
 router.get('/my-orders', protect, getOrders)
+router.get('/pending-orders', protect, getPendingOrders)
 
 // Seller routes
 router.get('/seller-orders', protect, authorize('seller'), getSellerOrders)

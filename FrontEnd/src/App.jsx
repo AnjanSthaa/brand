@@ -16,6 +16,8 @@ import ProtectedRoute from './store/ProtectedRoute'
 import OrderHistory from './components/OrderHistory'
 import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
+import PaymentSuccess from './pages/PaymentSuccess'
+import PaymentFailure from './pages/PaymentFailure'
 
 const AppContent = () => {
   return (
@@ -62,6 +64,8 @@ const AppContent = () => {
               path='/order-confirmation/:orderId'
               element={<OrderConfirmation />}
             />
+            <Route path='/payment-success' element={<PaymentSuccess />} />
+            <Route path='/payment-failure' element={<PaymentFailure />} />
           </Routes>
         </main>
       </div>

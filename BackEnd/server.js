@@ -7,6 +7,7 @@ import productRoutes from './routes/product.route.js'
 import cartRoutes from './routes/cart.route.js'
 import wishlistRoutes from './routes/wishlist.route.js'
 import orderRoutes from './routes/order.route.js'
+import paymentRoutes from './routes/payment.js'
 
 dotenv.config()
 
@@ -23,6 +24,7 @@ app.use('/api/products', productRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/wishlist', wishlistRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/payment', paymentRoutes)
 
 // Database connection and server start
 connectDB()

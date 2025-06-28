@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { LogOut, Store, PlusSquare, Grid } from 'lucide-react'
+import { LogOut, Store, PlusSquare, Grid, Package } from 'lucide-react'
 import Wishlist from '../components/Wishlist'
+import OrderHistory from '../components/OrderHistory'
 import { useNavigate } from 'react-router-dom'
 import SellersPageContent from './SellersPage'
 import useAuthStore from '../store/auth'
@@ -174,14 +175,14 @@ const Profile = () => {
             </button>
             <button
               className={`flex items-center px-2 sm:px-3 py-2 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold border-b-2 transition-colors duration-200 ${
-                activeTab === 'purchased'
+                activeTab === 'orders'
                   ? 'border-black text-black'
                   : 'border-transparent text-gray-500 hover:text-black'
               }`}
-              onClick={() => setActiveTab('purchased')}
+              onClick={() => setActiveTab('orders')}
             >
-              <PlusSquare className='w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2' />{' '}
-              Purchased
+              <Package className='w-4 h-4 md:w-5 md:h-5 mr-1 md:mr-2' /> Order
+              History
             </button>
           </div>
         </div>
@@ -204,14 +205,7 @@ const Profile = () => {
             <Wishlist />
           </div>
         ) : (
-          <div className='bg-white shadow p-3 sm:p-4 md:p-6 rounded-lg flex flex-col items-center justify-center min-h-[200px]'>
-            <h2 className='text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4'>
-              Purchased
-            </h2>
-            <p className='text-xs sm:text-sm md:text-base text-gray-600'>
-              You have not purchased any items yet.
-            </p>
-          </div>
+          <OrderHistory />
         )}
       </div>
     </div>

@@ -23,6 +23,10 @@ const orderSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        size: {
+          type: String,
+          required: true,
+        },
       },
     ],
     totalAmount: {
@@ -43,11 +47,35 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      required: true,
+      enum: ['pending', 'cash_on_delivery', 'esewa'],
+      default: 'pending',
     },
+    paymentStatus: {
+      type: String,
+      enum: ['pending', 'paid', 'failed'],
+      default: 'pending',
+    },
+    paymentDetails: {
+      transactionId: String,
+      paymentDate: Date,
+      amount: Number,
+    },
+    paymentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Payment',
+    },
+    transactionId: String,
     deliveryMethod: {
       type: String,
       required: true,
+    },
+    shippingCost: {
+      type: Number,
+      default: 5,
+    },
+    stockReserved: {
+      type: Boolean,
+      default: false,
     },
   },
   {

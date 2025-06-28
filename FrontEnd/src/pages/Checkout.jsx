@@ -16,9 +16,6 @@ const Checkout = () => {
     state: '',
     postalCode: '',
     country: '',
-    cardNumber: '',
-    expiry: '',
-    cvv: '',
   })
 
   useEffect(() => {
@@ -81,12 +78,7 @@ const Checkout = () => {
           zipCode: formData.postalCode,
           country: formData.country,
         },
-        paymentMethod: 'card',
         deliveryMethod: 'standard',
-        totalAmount: cartItems.reduce(
-          (total, item) => total + item.price * item.quantity,
-          0
-        ),
       }
 
       const response = await fetch('/api/orders', {
@@ -104,19 +96,22 @@ const Checkout = () => {
         throw new Error(data.message || data.error || 'Error creating order')
       }
 
-      // Clear the cart after successful order
-      await fetch('/api/cart/clear', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-
+      // Redirect to order confirmation page with payment options
       navigate(`/order-confirmation/${data.data._id}`)
     } catch (err) {
       setError(`Failed to place order: ${err.message}`)
       setLoading(false)
     }
+  }
+
+  const calculateTotal = () => {
+    const subtotal = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    )
+    const tax = subtotal * 0.085
+    const shipping = 5
+    return subtotal + tax + shipping
   }
 
   if (loading && !cartItems.length) {
@@ -208,41 +203,43 @@ const Checkout = () => {
                     />
                   </div>
                 </div>
-                <div>
-                  <label
-                    htmlFor='email'
-                    className='block text-sm font-medium text-gray-700 mb-2'
-                  >
-                    Email
-                  </label>
-                  <input
-                    type='email'
-                    id='email'
-                    name='email'
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
-                    placeholder='john@example.com'
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor='phone'
-                    className='block text-sm font-medium text-gray-700 mb-2'
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type='tel'
-                    id='phone'
-                    name='phone'
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
-                    placeholder='+1 (555) 000-0000'
-                  />
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                  <div>
+                    <label
+                      htmlFor='email'
+                      className='block text-sm font-medium text-gray-700 mb-2'
+                    >
+                      Email
+                    </label>
+                    <input
+                      type='email'
+                      id='email'
+                      name='email'
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
+                      placeholder='john@example.com'
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor='phone'
+                      className='block text-sm font-medium text-gray-700 mb-2'
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type='tel'
+                      id='phone'
+                      name='phone'
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
+                      placeholder='+1 234 567 8900'
+                    />
+                  </div>
                 </div>
                 <div>
                   <label
@@ -339,64 +336,60 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Payment Information */}
+            {/* Order Information */}
             <div className='bg-white rounded-lg shadow-lg p-8'>
-              <h2 className='text-2xl font-bold mb-6'>Payment Information</h2>
-              <div className='space-y-6'>
-                <div>
-                  <label
-                    htmlFor='cardNumber'
-                    className='block text-sm font-medium text-gray-700 mb-2'
-                  >
-                    Card Number
-                  </label>
-                  <input
-                    type='text'
-                    id='cardNumber'
-                    name='cardNumber'
-                    value={formData.cardNumber}
-                    onChange={handleInputChange}
-                    required
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
-                    placeholder='1234 5678 9012 3456'
-                  />
-                </div>
-                <div className='grid grid-cols-2 gap-6'>
-                  <div>
-                    <label
-                      htmlFor='expiry'
-                      className='block text-sm font-medium text-gray-700 mb-2'
+              <h2 className='text-2xl font-bold mb-6'>Order Information</h2>
+              <div className='space-y-4'>
+                <div className='flex items-center space-x-3'>
+                  <div className='w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center'>
+                    <svg
+                      className='w-4 h-4 text-blue-600'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
                     >
-                      Expiry Date
-                    </label>
-                    <input
-                      type='text'
-                      id='expiry'
-                      name='expiry'
-                      value={formData.expiry}
-                      onChange={handleInputChange}
-                      required
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
-                      placeholder='MM/YY'
-                    />
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+                      />
+                    </svg>
                   </div>
                   <div>
-                    <label
-                      htmlFor='cvv'
-                      className='block text-sm font-medium text-gray-700 mb-2'
+                    <p className='text-gray-900 font-medium'>
+                      Order First, Pay Later
+                    </p>
+                    <p className='text-gray-600 text-sm'>
+                      Your order will be placed without payment. You can choose
+                      your payment method on the next page.
+                    </p>
+                  </div>
+                </div>
+                <div className='flex items-center space-x-3'>
+                  <div className='w-8 h-8 bg-green-100 rounded-full flex items-center justify-center'>
+                    <svg
+                      className='w-4 h-4 text-green-600'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
                     >
-                      CVV
-                    </label>
-                    <input
-                      type='text'
-                      id='cvv'
-                      name='cvv'
-                      value={formData.cvv}
-                      onChange={handleInputChange}
-                      required
-                      className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition-colors'
-                      placeholder='123'
-                    />
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className='text-gray-900 font-medium'>
+                      Stock Reserved After Payment
+                    </p>
+                    <p className='text-gray-600 text-sm'>
+                      Product stock will only be reserved after you complete the
+                      payment.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -430,7 +423,7 @@ const Checkout = () => {
                         Quantity: {item.quantity}
                       </p>
                       <p className='text-gray-900 font-medium'>
-                        ${item.price.toFixed(2)}
+                        Rs. {item.price.toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -440,7 +433,7 @@ const Checkout = () => {
                 <div className='flex justify-between text-gray-600'>
                   <span>Subtotal</span>
                   <span>
-                    $
+                    Rs.{' '}
                     {cartItems
                       .reduce(
                         (total, item) => total + item.price * item.quantity,
@@ -451,12 +444,12 @@ const Checkout = () => {
                 </div>
                 <div className='flex justify-between text-gray-600'>
                   <span>Shipping</span>
-                  <span>$5.00</span>
+                  <span>Rs. 5.00</span>
                 </div>
                 <div className='flex justify-between text-gray-600'>
                   <span>Tax</span>
                   <span>
-                    $
+                    Rs.{' '}
                     {(
                       cartItems.reduce(
                         (total, item) => total + item.price * item.quantity,
@@ -467,17 +460,7 @@ const Checkout = () => {
                 </div>
                 <div className='flex justify-between font-bold text-lg pt-2 border-t border-gray-200'>
                   <span>Total</span>
-                  <span>
-                    $
-                    {(
-                      cartItems.reduce(
-                        (total, item) => total + item.price * item.quantity,
-                        0
-                      ) *
-                        1.085 +
-                      5
-                    ).toFixed(2)}
-                  </span>
+                  <span>Rs. {calculateTotal().toFixed(2)}</span>
                 </div>
               </div>
               <button
@@ -486,7 +469,7 @@ const Checkout = () => {
                 className={`w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors mt-6
                   ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                {loading ? 'Processing Payment...' : 'Place Order'}
+                {loading ? 'Placing Order...' : 'Place Order'}
               </button>
             </div>
           </div>
